@@ -1,0 +1,291 @@
+div, div:before, div:after {box-sizing:  border-box !important;}
+
+html, body {
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+html {
+	-webkit-text-size-adjust: none;
+}
+
+body {
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	line-height:  1.25;
+
+	background: #222222;
+	color: white;
+}
+
+#header {
+	/*background: #644a34 url(hero.png);
+	background-position: center center;
+	background-size: cover;*/
+	margin: 0px;
+	padding: 5px;
+	padding-right: 10px;
+
+
+	/*background: -webkit-radial-gradient(70% 50%, 100% 100%, rgba(152, 92, 58, 1) 0%, rgba(99, 71, 79, 1) 100%);
+	background: -moz-radial-gradient(70% 50%, ellipse, rgba(152, 92, 58, 1) 0%, rgba(99, 71, 79, 1) 100%);
+	background: -o-radial-gradient(70% 50%, ellipse 100% 100%, rgba(152, 92, 58, 1) 0%, rgba(99, 71, 79, 1) 100%);
+	background: -ms-radial-gradient(70% 50%, ellipse 100% 100%, rgba(152, 92, 58, 1) 0%, rgba(99, 71, 79, 1) 100%);
+	background: radial-gradient( ellipse 100% 100% at 70% 50%, rgba(152, 92, 58, 1) 0%, rgba(99, 71, 79, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#985C3A, endColorstr=#63474F);
+	background-size: auto;
+	background-repeat: repeat;*/
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b5bdc8+0,828c95+36,28343b+100;Grey+Black+3D */
+	background: rgb(181,189,200); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
+
+
+
+
+	transition: 0.5s;
+
+	text-align: center;
+}
+
+#header > #message {
+	opacity: 0.8;
+	background-color: yellow;
+	margin: 0px;
+}
+
+
+.content {
+	margin: 5px;
+	padding: 0px;
+	padding-bottom: 5px;
+}
+
+.hat {
+	margin: 10px;
+}
+
+#title {
+	font-weight: 900;
+	font-size: 3em;
+	padding: 5px;
+	margin-bottom: 0px;
+}
+
+#title a, #title a:visited {
+	opacity: 0.2;
+	color: black;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+#title a:hover {
+	opacity: 0.8;
+}
+
+#menu {
+	padding: 4px;
+	display: inline-flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.menu-item {
+	display: inline-block;
+	text-align: center;
+	padding: 4px;
+	margin: 2px;
+	color: white;
+	text-decoration: none;
+	min-width: 25px;
+
+	-webkit-border-radius: 40px;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	border-radius: 40px;
+}
+
+#unisearch-wrapper {
+	display: inline-block;
+	text-align: center;
+	padding: 2px;
+	margin-left: 5px;
+	width: 100%;
+}
+
+#unisearch {
+   border: 1px solid #f0eff5;
+   border-radius: 7px;
+   -webkit-border-radius: 7px;
+   -moz-border-radius: 7px;
+   -khtml-border-radius: 7px;
+   background: #f0eff5 !important;
+   outline: none;
+   height: 20px;
+   color: #333;
+   padding: 3px;
+   margin: 0px;
+   font-size: 14px;
+   font-family: Helvetica;
+}
+
+#title, #unisearch, #menu {
+	opacity: 0.65;
+}
+
+#unisearch:focus {
+  color: #000000;
+  border: 1px solid #ccc
+}
+
+a.menu-item:hover, .selected.menu-item {
+	color: black;
+	background: white;
+}
+
+* {
+	/*border: 0px solid red;*/
+}
+
+hr {
+    border: 0px;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.x-link {
+	display: block;
+	width: 160px;
+	height: 160px;
+	background: transparent;
+	margin: 5px;
+	float: left;
+	
+	position: relative; 
+    box-sizing: border-box;
+
+    z-index: 400;
+
+    /*-webkit-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	border-radius: 6px;*/
+
+	transition: 0.3s;
+}
+
+.x-wide {
+	display: block;
+	width: 100%;
+	line-height: 26px;
+	background: #1b1b1b;
+	color: white;
+	margin: 0px;
+	padding: 5px;
+
+	border-bottom: 1px solid #222222;
+	
+    box-sizing: border-box;
+
+	transition: 0.15s;
+	overflow: hidden;
+	text-decoration: none;
+}
+
+.x-wide:first-child {
+    -webkit-border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-topright: 6px;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+
+.x-wide:last-child {
+    -webkit-border-bottom-right-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+	-moz-border-radius-bottomright: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+
+	border-bottom: none;
+}
+
+.x-link:hover {
+	/*transform: scale(1.25) rotate(5deg);*/
+	filter: -webkit-filter: brightness(80%); /* Safari */
+    filter: brightness(80%);
+	z-index: 500;
+
+	/*box-shadow: 0px 10px 21px -2px #242424;
+	-webkit-box-shadow: 0px 10px 21px -2px #242424;
+	-moz-box-shadow: 0px 10px 21px -2px #242424;
+	-o-box-shadow: 0px 10px 21px -2px #242424;*/
+}
+
+.x-wide:hover {
+	-webkit-filter: brightness(1.15);
+	filter: brightness(1.15);
+}
+
+.subject {
+	display: inline;
+	font-size: 0.7em;
+	padding: 4px;
+	margin-right: 4px;
+	background: white;
+	color: black;
+
+	webkit-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	border-radius: 6px;
+}
+
+.x-item {
+	display: block;
+	width: 100%;
+	text-align: center;
+	/*color: white;*/
+	margin-bottom: 5px;
+	padding: 5px;
+	position: absolute; bottom: 0;
+	font-size: 0.9em;
+}
+
+.regular-card {
+	background-image: url(file_logo.png);
+}
+
+.important-card {
+	background-image: url(important_file_logo.png);
+}
+
+.book-card {
+	background-image: url(book_logo.png);
+}
+
+.link-card {
+	background-image: url(link_logo.png);
+}
+
+.sect {
+	font-weight: 900;
+	font-size: 1em;
+	padding: 6px;
+}
+
+#body-wrap {
+	transition: 0.2s;
+}
