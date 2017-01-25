@@ -1,4 +1,4 @@
-var packagesPath = 'content/';
+var packagesPath = 'http://xalyva.ml/content/';
 
 var packagesAvailible = [
 	's01matan',
