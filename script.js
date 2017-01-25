@@ -91,14 +91,6 @@ function loadXpackages() {
 	    	}	    	
     	});
   	});  
-
-     /*$('#content1').append(xTile('text', '#f6ba44', '#', ''));
-     $('#content1').append(xTile('text2', '#44944A', '#', ''));
-     $('#content1').append(xTile('text3', '#990066', '#', ''));
-     $('#content1').append(xTile('text4', '#A5260A', '#', ''));
-     $('#content1').append(xTile('text5', '#C5D0E6', '#', ''));
-     $('#content1').append(xTile('text6', '#30D5C8', '#', ''));
-     $('#content1').append(xTile('text7', '#AC7580', '#', ''));*/
 }
 
 function selectedSem() {
