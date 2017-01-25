@@ -27,7 +27,7 @@ var spinner = new Spinner(spinnerOpts).spin();
 
 $(document).ready(function() {
 	for (var i = 0; i < packagesAvailible.length; i++) {
-		packagesAvailible[i] = packagesPath + packagesAvailible[i] + '/package.json';
+		//packagesAvailible[i] = packagesPath + packagesAvailible[i] + '/package.json';
 	}
 
 	searchBox = document.getElementById('unisearch');
@@ -75,6 +75,80 @@ $(document).ready(function() {
 	getTrelloCards(semLists[1], 2);
 	getTrelloCards(semLists[2], 3);
 });
+
+
+
+var jobs = {
+	packages: 0,
+	cards: 0
+};
+
+jobs.run = function(type, amount) {	
+	this[type] = amount;
+	this.check();
+};
+
+jobs.check = function() {
+	if(this.packages === 0 && this.cards === 0) {
+		console.log('not busy');
+	} else {
+		console.log('busy');
+	}
+};
+
+jobs.done = function(type) {
+	if(this[type] !== 0) this[type]--;
+	this.check();
+};
+
+
+function loadSemPackages(sem) {
+	clearPackages();
+
+	var paths = [];
+	for(var i = 0; i < packagesAvailible.length; i++) {
+		if(sem == packagesAvailible[i].sem) {
+
+			for (var j = 0; j < packagesAvailible[i].list.length; j++) {
+				paths[j] = packagesPath + packagesAvailible[i].list[j] + '/package.json';
+			}
+
+		}	
+	}
+
+	console.log(paths);
+	loadPackages(paths);
+}
+
+
+function loadPackages(list) {
+	$.each(list, function(key, pack) {
+			$.getJSON(pack, function(json) {
+				console.log( 'Package ' + json.title + ' has arrived');
+
+				addPackage(json);
+    	
+			});
+		});  
+}
+
+function addPackage(pck) {
+	packages.push(pck);
+
+	var tileName = '<b>' + pck.title + '</b><br /><small>' + pck.prof + '</small>';
+	var imagePath = 'content/' + pck.id + '/logo.png';
+	$('#content1').append(xTile(tileName, pck.color, '/view#' + pck.id, imagePath));
+}
+
+function clearPackages() {
+	$('#content1').empty();
+	packages = [];
+}
+
+
+
+
+
 
 var packagesLoaded = 0;
 function loadXpackages() {
