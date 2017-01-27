@@ -7,6 +7,10 @@
     font-size: 1.2em;
 }
 
+.menu-item {
+	background-color: transparent;
+}
+
 #title {
 	font-size: 2.3em;
 }
