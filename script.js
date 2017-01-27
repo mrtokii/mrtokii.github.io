@@ -30,6 +30,9 @@ $(document).ready(function() {
 		//packagesAvailible[i] = packagesPath + packagesAvailible[i] + '/package.json';
 	}
 
+	/*document.body.appendChild(spinner.el);
+	spinner.stop();*/
+
 	searchBox = document.getElementById('unisearch');
 	$searchBox = $(searchBox);
 	spinnerElement = document.getElementById('spinner');
@@ -39,7 +42,8 @@ $(document).ready(function() {
 	  	$('.menu-item').removeClass('selected');
 	  	$(this).addClass('selected');
 	  	$searchBox.val('');
-	  	showXpackages($(this).attr('sem'));
+	  	//showXpackages($(this).attr('sem'));
+			loadItemsBySem(selectedSem());
 	}); 
 
 	
@@ -53,7 +57,7 @@ $(document).ready(function() {
 	  
 	  var qquestions = [];
 	  $.each(packages, function(key, val){
-		$.each(val.questions, function(key2, val2){  	
+			$.each(val.questions, function(key2, val2){  	
 			if(val2.name.toLowerCase().indexOf(query.toLowerCase()) != -1) {
 				var quest = {
 					subject: val.title,
@@ -70,39 +74,57 @@ $(document).ready(function() {
 	  showSearchTitles(qquestions);
 	};
 
-	loadXpackages();
-	getTrelloCards(semLists[0], 1);
+	//loadXpackages();
+	loadItemsBySem(selectedSem);
+
+	/*getTrelloCards(semLists[0], 1);
 	getTrelloCards(semLists[1], 2);
-	getTrelloCards(semLists[2], 3);
+	getTrelloCards(semLists[2], 3);*/
 });
 
+function loadItemsBySem(sem) {
+	clearPackages();
+	clearCards();
+	loadPackagesBySem(sem);
+	loadCardsBySem(sem);
+}
 
-
-var jobs = {
-	packages: 0,
-	cards: 0
+var jobs = { 
+	fields: { }
 };
 
 jobs.run = function(type, amount) {	
-	this[type] = amount;
+	this.fields[type] = amount;
 	this.check();
 };
 
 jobs.check = function() {
-	if(this.packages === 0 && this.cards === 0) {
+	var jobsToDo = false;
+
+	for(type in this.fields) {
+		if(this.fields[type] != 0) {
+			console.log('type ' + type + ' is ' + this.fields[type]);
+			jobsToDo = true;
+		}
+	}
+
+	if(!jobsToDo) {
 		console.log('not busy');
+		spinner.stop();
 	} else {
 		console.log('busy');
+		spinner.spin();
+		document.body.appendChild(spinner.el);		
 	}
 };
 
 jobs.done = function(type) {
-	if(this[type] !== 0) this[type]--;
+	if(this.fields[type] !== 0) this.fields[type]--;
 	this.check();
 };
 
 
-function loadSemPackages(sem) {
+function loadPackagesBySem(sem) {
 	clearPackages();
 
 	var paths = [];
@@ -129,7 +151,7 @@ function loadPackages(list) {
 				addPackage(json);
     	
 			});
-		});  
+	});  
 }
 
 function addPackage(pck) {
@@ -145,12 +167,75 @@ function clearPackages() {
 	packages = [];
 }
 
+function loadCardsBySem(sem) {
+	var listId;
+	$.each(cardsStorage, function(key, list) {
+		if(list.sem == sem) {
+			listId = list.listId;
+		}
+	});  
+
+  trelloService.get('lists/' + listId + '?cards=open&card_fields=name,labels,desc&', function(result) {
+    for (var i = 0; i < result.cards.length; i++) {
+      var current = result.cards[i];
+      var card = {
+        text: current.name,
+        url: '',
+        sem: sem,
+        important: false,
+        book: false,
+        link: false
+      };
+
+      if (current.desc != '') {
+        card.url = current.desc;
+      }
+
+      if(typeof(current.labels[0]) != "undefined") {
+      	if(current.labels[0].id == importantLabelId) {
+      		card.important = true;
+      	}
+        if(current.labels[0].id == bookLabelId) {
+          card.book = true;
+        }
+        if(current.labels[0].id == linkLabelId) {
+          card.link = true;
+        }
+      }
+
+      addCard(card);    
+    }
+  });
+}
+
+function addCard(card) {
+	var tileName = card.text;
+	if(card.url != '') {
+		var tile = linkTile(tileName, card.url);
+		if(card.important == true) {
+			tile.removeClass('regular-card');
+			tile.addClass('important-card');
+		} else if(card.book == true) {
+			tile.removeClass('regular-card');
+			tile.addClass('book-card');
+		} else if(card.link == true) {
+			tile.removeClass('regular-card');
+			tile.addClass('link-card');
+		}
+		$('#content2').append(tile);
+
+	} else {
+		$('#content2').append(textTile(tileName));
+	}
+}
+
+function clearCards() {
+	$('#content2').empty();
+}
 
 
 
-
-
-var packagesLoaded = 0;
+/*var packagesLoaded = 0;
 function loadXpackages() {
 	$.each(packagesAvailible, function(key, val){
     	$.getJSON( val, function( json ) {
@@ -165,7 +250,7 @@ function loadXpackages() {
 	    	}	    	
     	});
   	});  
-}
+}*/
 
 function selectedSem() {
 	return $('.menu-item.selected').attr('sem');
@@ -195,7 +280,7 @@ function showSearchTitles(ttl) {
   	});
 }
 
-function showXpackages(sem) {
+/*function showXpackages(sem) {
 	$('#content1').empty();
 	var pckLoaded = 0;
 	$.each(packages, function(key, val){
@@ -215,9 +300,9 @@ function showXpackages(sem) {
   	}
 
   	showCards(sem);
-}
+}*/
 
-function showCards(sem) {
+/*function showCards(sem) {
 	$('#content2').empty();
 	var pckLoaded = 0;
 	$.each(trelloCards, function(key, val){
@@ -254,7 +339,7 @@ function showCards(sem) {
   	}
 
   	
-}
+}*/
 
 function xTile(text, color, url, image) {
   darkerColor = ColorLuminance(color, -0.2);
@@ -323,7 +408,7 @@ function textTile(text) {
   return xElemWrapper;
 }
 
-var listsLoaded = 0;
+/*var listsLoaded = 0;
 function getTrelloCards(listId, _sem) {
   document.body.appendChild(spinner.el);
   $('#body-wrap').css('opacity', '0');
@@ -366,4 +451,4 @@ function getTrelloCards(listId, _sem) {
       $('#body-wrap').css('opacity', '1'); 
     }
   });
-}
+}*/

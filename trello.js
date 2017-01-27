@@ -1,8 +1,24 @@
-var semLists = [
+var cardsStorage = [
+	{
+		sem: 1,
+		listId: '577c0536fcda73c78768bb15'
+	},
+	{
+		sem: 2,
+		listId: '577c0541ad7de7ac31ae964c'
+	},
+	{
+		sem: 3,
+		listId: '577c05448bb487fea2a1c5ac'
+	}
+];
+
+
+/*var semLists = [
 	'577c0536fcda73c78768bb15',
 	'577c0541ad7de7ac31ae964c',
 	'577c05448bb487fea2a1c5ac'
-];
+];*/
 
 var importantLabelId = '5633819519ad3a5dc2f82f25';
 var bookLabelId = '584ec0237a7de3854d10ef36';
