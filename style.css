@@ -166,7 +166,6 @@ hr {
 	background: transparent;
 	margin: 5px;
 	float: left;
-	
 	position: relative; 
     box-sizing: border-box;
 
@@ -186,7 +185,7 @@ hr {
 	display: block;
 	width: 100%;
 	line-height: 26px;
-	background: #1b1b1b;
+	background: rgba(30, 30, 30, 0.2);
 	color: white;
 	margin: 0px;
 	padding: 5px;
@@ -198,6 +197,11 @@ hr {
 	transition: 0.15s;
 	overflow: hidden;
 	text-decoration: none;
+}
+
+.x-wide:hover {
+	-webkit-filter: brightness(0.85);
+	filter: brightness(0.85);
 }
 
 .x-wide:first-child {
@@ -230,11 +234,6 @@ hr {
 	-webkit-box-shadow: 0px 10px 21px -2px #242424;
 	-moz-box-shadow: 0px 10px 21px -2px #242424;
 	-o-box-shadow: 0px 10px 21px -2px #242424;*/
-}
-
-.x-wide:hover {
-	-webkit-filter: brightness(1.15);
-	filter: brightness(1.15);
 }
 
 .subject {

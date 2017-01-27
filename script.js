@@ -110,9 +110,11 @@ jobs.check = function() {
 
 	if(!jobsToDo) {
 		console.log('not busy');
+		$('#body-wrap').css('opacity', '1');
 		spinner.stop();
 	} else {
 		console.log('busy');
+		$('#body-wrap').css('opacity', '0.2');
 		spinner.spin();
 		document.body.appendChild(spinner.el);		
 	}
@@ -144,10 +146,13 @@ function loadPackagesBySem(sem) {
 
 
 function loadPackages(list) {
+	jobs.run('packages', list.length);
+
 	$.each(list, function(key, pack) {
 			$.getJSON(pack, function(json) {
 				console.log( 'Package ' + json.title + ' has arrived');
 
+				jobs.done('packages');
 				addPackage(json);
     	
 			});
@@ -168,14 +173,22 @@ function clearPackages() {
 }
 
 function loadCardsBySem(sem) {
-	var listId;
+	jobs.run('cards', 1);
+
+	var listId = 0;
 	$.each(cardsStorage, function(key, list) {
 		if(list.sem == sem) {
 			listId = list.listId;
 		}
 	});  
 
+	if(listId == 0) {
+		jobs.done('cards');
+		return;		
+	}
+
   trelloService.get('lists/' + listId + '?cards=open&card_fields=name,labels,desc&', function(result) {
+		jobs.run('cards', result.cards.length);
     for (var i = 0; i < result.cards.length; i++) {
       var current = result.cards[i];
       var card = {
@@ -203,6 +216,7 @@ function loadCardsBySem(sem) {
         }
       }
 
+			jobs.done('cards');
       addCard(card);    
     }
   });
@@ -267,7 +281,7 @@ function showSearchTitles(ttl) {
     						.css('background-image', '-webkit-linear-gradient(top, ' + lighterColor + ' 0%, ' + val.color + ' 50%, ' + darkerColor + ' 100%)')
     						.css('background-image', 'linear-gradient(to bottom, ' + lighterColor + ' 0%, ' + val.color + ' 50%, ' + darkerColor + ' 100%)')
     						.css("color", isDark(hexToRgb(val.color)) ? 'white' : 'black')
-    						.html(val.subject + ' (' + val.sem + ')');
+    						.html(val.subject);
 
     	var xElem = $('<a></a>')
     						.attr('id', 'xlink-' + '/view/q/#' + val.id + '/' + val.qid)
