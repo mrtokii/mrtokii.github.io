@@ -23,8 +23,7 @@ body {
 	background-position: center center;
 	background-size: cover;*/
 	margin: 0px;
-	padding: 5px;
-	padding-right: 10px;
+	padding: 0px;
 
 
 	/*background: -webkit-radial-gradient(70% 50%, 100% 100%, rgba(152, 92, 58, 1) 0%, rgba(99, 71, 79, 1) 100%);
@@ -42,21 +41,10 @@ body {
 	background: -webkit-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
-
-
-
-
 	transition: 0.5s;
 
 	text-align: center;
 }
-
-#header > #message {
-	opacity: 0.8;
-	background-color: yellow;
-	margin: 0px;
-}
-
 
 .content {
 	margin: 5px;
@@ -64,15 +52,13 @@ body {
 	padding-bottom: 5px;
 }
 
-.hat {
-	margin: 10px;
-}
-
 #title {
+	display: inline-block;
 	font-weight: 900;
-	font-size: 3em;
-	padding: 5px;
-	margin-bottom: 0px;
+	font-size: 2.7em;
+	padding: 4px;
+
+	border: 0px solid red;
 }
 
 #title a, #title a:visited {
@@ -87,11 +73,18 @@ body {
 }
 
 #menu {
-	padding: 6px;
+	padding: 0px;
+	margin: 0px;
 	box-sizing:  border-box;
 	display: inline-flex;
 	flex-direction: row;
 	width: 100%;
+
+	border: 0px solid red;
+
+	-webkit-box-shadow: 0px 5px 26px -4px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 5px 26px -4px rgba(0,0,0,0.75);
+	box-shadow: 0px 5px 26px -4px rgba(0,0,0,0.75);
 }
 
 .menu-item {
@@ -116,36 +109,33 @@ body {
 #unisearch-wrapper {
 	display: inline-block;
 	text-align: center;
-	background-color: transparent;
-    border: 0px solid;
+	background-color: #ddd;
+    border: 0px solid red;
 	padding: 0px;
-	margin-right: 8px;
+	padding-left: 5px;
 	width: 100%;
 }
 
 #unisearch {
-   border: 1px solid #ddd;
+   border: 0px solid #ddd;
    /*border-radius: 7px;
    -webkit-border-radius: 7px;
    -moz-border-radius: 7px;
    -khtml-border-radius: 7px;*/
-   background: #ddd;
+
+   background: transparent;
    outline: none;
-   height: 20px;
+   height: 100%;
    color: #333;
-   padding: 6px;
+   padding: 0px;
    margin: 0px;
+   
    font-size: 14px;
    font-family: Helvetica;
 }
 
 #title, #menu {
-	opacity: 0.65;
-}
-
-#unisearch:focus {
-  color: #000000;
-  border: 1px solid #ccc
+	opacity: 0.75;
 }
 
 a.menu-item:hover, .selected.menu-item {
@@ -291,5 +281,5 @@ hr {
 }
 
 #body-wrap {
-	transition: 0.2s;
+	transition: 0s;
 }

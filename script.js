@@ -110,11 +110,14 @@ jobs.check = function() {
 
 	if(!jobsToDo) {
 		console.log('not busy');
-		$('#body-wrap').css('opacity', '1');
+		$('#body-wrap').css('opacity', '1')
+									 .css('filter', 'blur(0px)');
 		spinner.stop();
 	} else {
 		console.log('busy');
-		$('#body-wrap').css('opacity', '0.2');
+		$('#body-wrap').css('opacity', '0.3')
+									 .css('filter', 'blur(50px)');
+
 		spinner.spin();
 		document.body.appendChild(spinner.el);		
 	}
