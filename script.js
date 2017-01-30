@@ -51,7 +51,7 @@ $(document).ready(function() {
 	  var query = $searchBox.val();
 	  
 	  if(query == '') {
-	    showXpackages(selectedSem()); 
+	    loadItemsBySem(selectedSem()); 
 	    return;  
 	  }
 	  
@@ -116,7 +116,7 @@ jobs.check = function() {
 	} else {
 		console.log('busy');
 		$('#body-wrap').css('opacity', '0.3')
-									 .css('filter', 'blur(50px)');
+									 .css('filter', 'blur(0px)');
 
 		spinner.spin();
 		document.body.appendChild(spinner.el);		

@@ -1,3 +1,11 @@
+#header {
+    padding: 10px;
+}
+
+#content2 {
+    padding: 10px;
+}
+
 #menu {
 	display: flex;    
     width: 100%;

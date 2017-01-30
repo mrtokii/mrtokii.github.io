@@ -23,7 +23,8 @@ body {
 	background-position: center center;
 	background-size: cover;*/
 	margin: 0px;
-	padding: 0px;
+	padding: 50px;
+	padding-bottom: 0px;
 
 
 	/*background: -webkit-radial-gradient(70% 50%, 100% 100%, rgba(152, 92, 58, 1) 0%, rgba(99, 71, 79, 1) 100%);
@@ -35,13 +36,15 @@ body {
 	background-size: auto;
 	background-repeat: repeat;*/
 
+	background: #2A8D9C;
+
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b5bdc8+0,828c95+36,28343b+100;Grey+Black+3D */
-	background: rgb(181,189,200); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
-	transition: 0.5s;
+	/*background: rgb(181,189,200);
+	background: -moz-linear-gradient(top,  rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%);
+	background: -webkit-linear-gradient(top,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+	background: linear-gradient(to bottom,  rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 );
+	transition: 0.5s;*/
 
 	text-align: center;
 }
@@ -50,6 +53,17 @@ body {
 	margin: 5px;
 	padding: 0px;
 	padding-bottom: 5px;
+}
+
+#content2 {
+	padding: 50px;
+	padding-top: 0px;
+}
+
+#content2 .x-link {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }
 
 #title {
@@ -75,17 +89,28 @@ body {
 #menu {
 	padding: 0px;
 	margin: 0px;
+	margin-bottom: 10px;
 	box-sizing:  border-box;
 	display: inline-flex;
 	flex-direction: row;
 	width: 100%;
 
-	border: 0px solid red;
+	border: 0px solid #aaa;
+	overflow: hidden;
+
+	
+}
+
+#menu, .x-link, .subject {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 
 	-webkit-box-shadow: 0px 5px 26px -4px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 5px 26px -4px rgba(0,0,0,0.75);
 	box-shadow: 0px 5px 26px -4px rgba(0,0,0,0.75);
 }
+
 
 .menu-item {
 	display: inline-block;
@@ -135,7 +160,7 @@ body {
 }
 
 #title, #menu {
-	opacity: 0.75;
+	opacity: 0.65;
 }
 
 a.menu-item:hover, .selected.menu-item {
@@ -173,7 +198,7 @@ hr {
 	border-radius: 6px;
 	border-radius: 6px;*/
 
-	transition: 0.3s;
+	transition: 0.15s;
 }
 
 .x-wide {
@@ -238,13 +263,6 @@ hr {
 	margin-right: 4px;
 	background: white;
 	color: black;
-
-	webkit-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-	border-radius: 6px;
 }
 
 .x-item {
