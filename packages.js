@@ -39,7 +39,7 @@ var packagesAvailible = [
 		sem: 4,
 		list:
 		[
-
+			's04test'
 		]
 	}
 ];

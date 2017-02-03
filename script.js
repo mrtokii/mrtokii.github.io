@@ -75,7 +75,7 @@ $(document).ready(function() {
 	};
 
 	//loadXpackages();
-	loadItemsBySem(selectedSem);
+	loadItemsBySem(selectedSem());
 
 	/*getTrelloCards(semLists[0], 1);
 	getTrelloCards(semLists[1], 2);
@@ -134,6 +134,8 @@ function loadPackagesBySem(sem) {
 
 	var paths = [];
 	for(var i = 0; i < packagesAvailible.length; i++) {
+		console.log(sem);
+		console.log(packagesAvailible[i].sem);
 		if(sem == packagesAvailible[i].sem) {
 
 			for (var j = 0; j < packagesAvailible[i].list.length; j++) {
