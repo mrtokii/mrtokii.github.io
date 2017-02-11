@@ -38,6 +38,13 @@ body {
 
 	background: #2A8D9C;
 
+	/*background-image: -ms-linear-gradient(top right, #3AA17E 0%, #00537E  100%);
+	background-image: -moz-linear-gradient(top right, #3AA17E 0%, #00537E  100%);
+	background-image: -o-linear-gradient(top right, #3AA17E 0%, #00537E  100%);
+	background-image: -webkit-gradient(linear, right top, left bottom, color-stop(0, #3AA17E), color-stop(100, #00537E ));
+	background-image: -webkit-linear-gradient(top right, #3AA17E 0%, #00537E  100%);
+	background-image: linear-gradient(to bottom left, #3AA17E 0%, #00537E  100%);*/
+
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b5bdc8+0,828c95+36,28343b+100;Grey+Black+3D */
 	/*background: rgb(181,189,200);
 	background: -moz-linear-gradient(top,  rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%);
@@ -102,6 +109,12 @@ body {
 }
 
 #menu, .x-link, .subject {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#menu, .subject {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -199,6 +212,22 @@ hr {
 	border-radius: 6px;*/
 
 	transition: 0.15s;
+}
+
+#footnote {
+	font-size: 0.7em;
+	color: #aaa;
+	text-align: center;
+	padding: 5px;
+}
+
+#footnote a, #footnote a:visited {
+	text-decoration: none;
+	color: darkorange;
+}
+
+#footnote a:hover {
+	text-decoration: underline;
 }
 
 .x-wide {

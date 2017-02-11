@@ -23,9 +23,32 @@ var spinnerOpts = {
 , position: 'absolute' // Element positioning
 }
 
+var sunlight = {
+	morning: { 
+		light: '#FFE98A',
+		dark: '#D74177'
+	},
+
+	day: { 
+		light: '#FFFFC7',
+		dark: '#00B7FF'
+	},
+
+	evening: { 
+		light: '#93278F',
+		dark: '#00A99D'
+	},
+
+	night: { 
+		light: '#3AA17E',
+		dark: '#00537E'
+	}
+};
+
 var spinner = new Spinner(spinnerOpts).spin();
 
 $(document).ready(function() {
+
 	for (var i = 0; i < packagesAvailible.length; i++) {
 		//packagesAvailible[i] = packagesPath + packagesAvailible[i] + '/package.json';
 	}
@@ -82,6 +105,19 @@ $(document).ready(function() {
 	getTrelloCards(semLists[2], 3);*/
 });
 
+function repaintHeader(colors) {
+	var start = colors.light;
+	var end = colors.dark;
+
+	$('#header')
+		.css('background-image', '-ms-linear-gradient(top right, ' + start + ' 0%, ' + end + '  100%)')
+		.css('background-image', '-moz-linear-gradient(top right, ' + start + ' 0%, ' + end + '  100%)')
+		.css('background-image', '-o-linear-gradient(top right, ' + start + ' 0%, ' + end + '  100%)')
+		.css('background-image', '-webkit-gradient(linear, right top, left bottom, color-stop(0, ' + start + '), color-stop(100, ' + end + ' ))')
+		.css('background-image', '-webkit-linear-gradient(top right, ' + start + ' 0%, ' + end + '  100%)')
+		.css('background-image', 'linear-gradient(to bottom left, ' + start + ' 0%, ' + end + '  100%)');
+}
+
 function loadItemsBySem(sem) {
 	clearPackages();
 	clearCards();
@@ -89,6 +125,8 @@ function loadItemsBySem(sem) {
 	loadCardsBySem(sem);
 }
 
+var packagesShowed = 0;
+var cardsShowed = 0;
 var jobs = { 
 	fields: { }
 };
@@ -103,7 +141,6 @@ jobs.check = function() {
 
 	for(type in this.fields) {
 		if(this.fields[type] != 0) {
-			console.log('type ' + type + ' is ' + this.fields[type]);
 			jobsToDo = true;
 		}
 	}
@@ -113,6 +150,13 @@ jobs.check = function() {
 		$('#body-wrap').css('opacity', '1')
 									 .css('filter', 'blur(0px)');
 		spinner.stop();
+
+		if(packagesShowed % 2 != 0)
+			$('#content1').append('<div style = "width: 130px; height: 1px;"> </div>');
+
+		if(cardsShowed % 2 != 0)
+			$('#content2').append('<div style = "width: 130px; height: 1px;"> </div>');
+			
 	} else {
 		console.log('busy');
 		$('#body-wrap').css('opacity', '0.3')
@@ -151,21 +195,23 @@ function loadPackagesBySem(sem) {
 
 
 function loadPackages(list) {
+	packagesShowed = 0;
 	jobs.run('packages', list.length);
 
 	$.each(list, function(key, pack) {
 			$.getJSON(pack, function(json) {
 				console.log( 'Package ' + json.title + ' has arrived');
-
-				jobs.done('packages');
 				addPackage(json);
+				jobs.done('packages');			
     	
 			});
-	});  
+	}); 
 }
 
 function addPackage(pck) {
 	packages.push(pck);
+	packagesShowed++;
+	console.log('packages showed:' + packagesShowed);
 
 	var tileName = '<b>' + pck.title + '</b><br /><small>' + pck.prof + '</small>';
 	var imagePath = 'content/' + pck.id + '/logo.png';
@@ -178,6 +224,7 @@ function clearPackages() {
 }
 
 function loadCardsBySem(sem) {
+	cardsShowed = 0;
 	jobs.run('cards', 1);
 
 	var listId = 0;
@@ -220,14 +267,15 @@ function loadCardsBySem(sem) {
           card.link = true;
         }
       }
-
-			jobs.done('cards');
-      addCard(card);    
+			
+      addCard(card);  
+			jobs.done('cards');  
     }
   });
 }
 
 function addCard(card) {
+	cardsShowed++;
 	var tileName = card.text;
 	if(card.url != '') {
 		var tile = linkTile(tileName, card.url);
