@@ -5,12 +5,18 @@ var links, pics;
 var questions = [];
 var searchBox = document.getElementById('x-search');
 var $searchBox = $(searchBox);
+var is_mobile = true;
 
 // Getting package
 var packageID = window.location.hash.slice(1);
 
 var packagePath = contentPath + packageID + '/package.json';
 console.log("package " + packagePath);
+
+is_mobile = isMobile();
+if(is_mobile) {
+	showContentView(false);
+}
 
 $.getJSON( packagePath, function( json ) {
 	console.log("package arrived " + json.id);
@@ -20,20 +26,25 @@ $.getJSON( packagePath, function( json ) {
 	links = $('#links');
 	pics = $('#pics');
 	
+	
 	x();
 }).fail(function() {
     document.write('Wrong package ID!');
 });
 
 $(document).ready(function() {
-	
 }); 
 
 function x() {
 	document.title = package.title;
 	$('#x-title').text(package.title);
-	$searchBox.show();
-	pics.empty();
+	//$searchBox.show();
+	//pics.empty();
+
+	if(is_mobile) {
+		showContentView(false);
+	}
+
 	questions = [];
 	getQuestions();
 	showLinks(questions);
@@ -122,15 +133,22 @@ function image(url) {
 
 
 
-
+// Получение массива страниц из "принтерного" представления
 function getPages(array) {
 	var outArray = [];
 
+	// Если на входе уже массив, то возвращаем его
+	if(Array.isArray(array))
+		return array;
+
+	// Если страницы не заданы, то пустой массив
 	if(array == '')
 		return outArray;
 
+	// Разбиваем перечисление страниц
 	var commaSeparated = array.split(',');
 
+	// Проверяем на интервалы в перечислениях
 	for(var i = 0; i < commaSeparated.length; i++) {
 		var progression = commaSeparated[i].split('-');
 
@@ -143,6 +161,7 @@ function getPages(array) {
 		}
 	}
 
+	// Сортируем массив
 	outArray.sort(function(a, b) {
   		return a - b;
 	});
@@ -152,10 +171,45 @@ function getPages(array) {
 
 // ====================================
 
+function showContentView(en) {
+	if(en) {
+		$('#sidebar')
+			.hide();
+
+		$('#content')
+			.show()
+			.css('left', '0px');
+	} else {
+		$('#sidebar')
+			.show()
+			.css('right', '0px')
+			.css('width', '100%');
+		$('#content').hide();
+	}
+
+	$('#sidebar').scrollTop(0);
+	$('#content').scrollTop(0);
+}
+
+// Проверка на тип клиента
+function isMobile() {
+	// Порог в пикселях для мобильного устройства
+	var threshold = 1000;
+
+	return $(window).width() < threshold ? true : false;
+}
+
 function q(id) {
-	$searchBox.hide();
+	//$searchBox.hide();
 	scrollTo(0, 0);
-	links.empty();
+	//links.empty();
+
+	var target = $('#content');
+	target.empty();
+
+	if(is_mobile) {
+		showContentView(true);
+	}
 
 	// Если выбран один конкретный вопрос
 	if(id >= 0) {
@@ -163,41 +217,45 @@ function q(id) {
 		var pages = getPages(current.pages);
 
 		// Меняем заголовок на название вопроса
-		$('#x-title').html(current.name);
+		//$('#x-title').html(current.name);
 
-		showPages(current, 0);
+		// Пишем название вопроса
+		target.append(caption(current.name));
+
+		showPages(current, 0, target);
 	} else {
-		if(package.note !== undefined)
-			links.append(note(package.note));
+		/*if(package.note !== undefined)
+			links.append(note(package.note));*/
 
 		package.questions.forEach(function(quest, i, arr) {
-			showPages(quest, i+1);
+			showPages(quest, i+1, target);
 		});	
 	}
 
-	// Добавляем кнопку для возврата назад
-	pics.append(link('', 'Назад к списку'));
+	// Добавляем кнопку для возврата назад если с телефона
+	if(is_mobile)
+		target.append(link('', 'Назад к списку'));
 
-	window.scrollTo(0, 0);
+	$('#content').scrollTop(0);
 }
 
 // Показывает страницы данного вопроса
-function showPages(quest, number) {
+function showPages(quest, number, targ) {
 	var pages = getPages(quest.pages);
 
 	// Если нужно расширенное представление страницы
 	if(number != 0)
-		pics.append(caption('[' + number + '] ' + quest.name + ': '));
+		targ.append(caption('[' + number + '] ' + quest.name + ': '));
 
 	// Показываем заметку, если есть
 	if(quest.note !== undefined)
-		pics.append(note(quest.note));
+		targ.append(note(quest.note));
 
 	// Если фотографии в вопросе отсутствуют
 	if(pages.length == 0) {
 		// Показываем пустую картинку
-		pics.append(captionLink('Страница отсутствует', missingPath));
-		pics.append(image(missingPath));
+		targ.append(captionLink('Страница отсутствует', missingPath));
+		targ.append(image(missingPath));
 		return;
 	} 
 
@@ -207,8 +265,8 @@ function showPages(quest, number) {
 		var linkText = 'Сохранить страницу #' + page;
 
 		// Показываем ссылку и картинку
-		pics.append(captionLink(linkText, path));
-		pics.append(image(path));		
+		targ.append(captionLink(linkText, path));
+		targ.append(image(path));		
 	});	
 }
 

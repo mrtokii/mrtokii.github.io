@@ -4,6 +4,26 @@ body {
 	margin: 0px;
 }
 
+#sidebar, #content {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#sidebar {
+	left: 0px;
+	width: 500px;
+
+}
+
+#content {
+	right: 0px;
+	left: 500px;
+}
+
 .x-link, .x-caption, .x-title, .x-note {
 	display: block;
 	padding: 12px;
@@ -82,7 +102,7 @@ body {
 	color: #222;
 }
 
-#pics img {
+#content img {
 	width: 100%;
 	height: auto;
 }	
