@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Manual sorting</title>
+        <title>Сортировочка</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
 
@@ -181,14 +181,14 @@
         <div id="wrapper">
             <div id="load-form">
                 <textarea rows="5" name="text" id="load-text"></textarea>
-                <div id="load-button" onclick="loadFromText()">Load</div>
+                <div id="load-button" onclick="loadFromText()">Загрузить</div>
             </div>
-            <div id="load-toggle-button" onclick="showhideLoadForm()">Load data</div>
+            <div id="load-toggle-button" onclick="showhideLoadForm()">Изменить список</div>
             <div class="choice" unselectable="on" onselectstart="return false;">
                 <div style="background: teal; color: white;" onclick="chosen('a')"><span id="choice-a"></span></div>
                 <div style="background: brown; color: white;" onclick="chosen('b')"><span id="choice-b"></span></div>
             </div>
-            <div id="result-button" onclick="getResults()">Show/hide results</div>
+            <div id="result-button" onclick="getResults()">Результаты</div>
 
             <div id="results"></div>
         </div>
@@ -196,16 +196,29 @@
 
     <script>
         let data = [
-            'Один',
-            'Два',
-            'Три',
-            'Четыре',
-            'Пять',
-            'Шесть',
-            'Семь',
-            'Восемь',
-            'Девять',
-            'Десять'
+            'Кот',
+            'Собака',
+            'Кролик',
+            'Лиса',
+            'Волк',
+            'Акула',
+            'Корова',
+            'Носорог',
+            'Лебедь',
+            'Хамелеон',
+            'Заяц',
+            'Слон',
+            'Курица',
+            'Выхухоль',
+            'Мышь',
+            'Хомяк',
+            'Тигр',
+            'Голубь',
+            'Страус',
+            'Кенгуру',
+            'Орёл',
+            'Улитка',
+            'Лев'
         ];
 
         let choiceA = document.getElementById('choice-a');
