@@ -1,0 +1,398 @@
+<html>
+    <head>
+        <title>Сортировочка</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="theme-color" content="#ffffff">
+
+        <style>
+            body {
+                font-family: 'Arial Narrow Bold', sans-serif;
+                position: relative;
+
+                background: bisque;
+            }
+
+            .choice div {
+                width: 400px; 
+                height: 200px;
+                text-align: center; 
+                font-size: 64px; 
+                font-weight: 100;
+                
+                line-height: 180px;
+
+                cursor: pointer;
+
+                overflow: hidden;
+
+                -moz-user-select: none; 
+                -webkit-user-select: none; 
+                -ms-user-select:none; 
+                user-select:none;
+                -o-user-select:none;
+            }
+
+            #result-button, #load-toggle-button {
+                width: 400px; 
+                height: 40px; 
+                background: black; 
+                color: bisque; 
+                text-align: center; 
+                font-size: 30px; 
+
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                font-weight: 400;
+
+                cursor: pointer;
+
+                overflow: hidden;
+            }
+
+            #result-button {
+                border-top: 2px solid bisque;
+            }
+
+            #results {
+                font-size: 24px; 
+                background: rgb(209, 175, 135);
+                color: black;
+                
+            }
+
+            #wrapper {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            #load-form {
+                font-size: 24px; 
+                background: rgb(209, 175, 135);
+                color: black;
+                text-align: center;
+                padding: 0px;
+            }
+
+            #load-text {
+                width: 100%;
+            }
+
+            #Load-toggle-button {
+                font-size: 18px;
+                height: 24px;
+
+                border-bottom: 2px solid bisque;
+            }
+
+            #load-button {
+                width: 400px; 
+                height: 40px; 
+                background: black; 
+                color: bisque; 
+                text-align: center; 
+                font-size: 30px; 
+
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                font-weight: 400;
+
+                cursor: pointer;
+            }
+
+            textarea {
+                border: 4px solid white;
+                
+                
+            }
+
+            .res-item {
+                padding: 6px;
+
+                text-align: left;
+            }
+
+            @media (max-width: 600px) {
+                body {
+                    padding: 0px;
+                    margin: 0px;
+                }
+                
+                #wrapper {
+                    position: static;
+                    width: 100%;
+                    overflow: hidden;
+                    transform: translate(0, 0); 
+
+                    padding: 0px;
+
+                    border-radius: 0px;
+                }
+
+                .choice div {
+                    width: 100%; 
+                    height: 160px;
+                    text-align: center; 
+                    font-size: 54px; 
+                    font-weight: 100;
+                    
+                    line-height: 150px;
+
+                    cursor: pointer;
+
+                    overflow: hidden;
+                }
+
+                #result-button, #load-toggle-button {
+                    width: 100%; 
+                    height: 40px; 
+                    background: black; 
+                    color: bisque; 
+                    text-align: center; 
+                    font-size: 30px; 
+
+                    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                    font-weight: 400;
+
+                    cursor: pointer;
+                }
+
+                #load-button {
+                    width: 100%; 
+                    height: 40px; 
+                    background: black; 
+                    color: bisque; 
+                    text-align: center; 
+                    font-size: 30px; 
+
+                    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                    font-weight: 400;
+
+                    cursor: pointer;
+                }
+
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript" >
+            (function (d, w, c) {
+                (w[c] = w[c] || []).push(function() {
+                    try {
+                        w.yaCounter46535214 = new Ya.Metrika({
+                            id:46535214,
+                            clickmap:true,
+                            trackLinks:true,
+                            accurateTrackBounce:true
+                        });
+                    } catch(e) { }
+                });
+
+                var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+                if (w.opera == "[object Opera]") {
+                    d.addEventListener("DOMContentLoaded", f, false);
+                } else { f(); }
+            })(document, window, "yandex_metrika_callbacks");
+        </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/46535214" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!-- /Yandex.Metrika counter -->
+
+        <div id="wrapper">
+            <div id="load-form">
+                <textarea rows="5" name="text" id="load-text"></textarea>
+                <div id="load-button" onclick="loadFromText()">Загрузить</div>
+            </div>
+            <div id="load-toggle-button" onclick="showhideLoadForm()">Изменить список</div>
+            <div class="choice" unselectable="on" onselectstart="return false;">
+                <div style="background: teal; color: white;" onclick="chosen('a')"><span id="choice-a"></span></div>
+                <div style="background: brown; color: white;" onclick="chosen('b')"><span id="choice-b"></span></div>
+            </div>
+            <div id="result-button" onclick="getResults()">Результаты</div>
+
+            <div id="results"></div>
+        </div>
+    </body>
+
+    <script>
+        let data = [
+            'Кот',
+            'Собака',
+            'Кролик',
+            'Лиса',
+            'Волк',
+            'Акула',
+            'Корова',
+            'Носорог',
+            'Лебедь',
+            'Хамелеон',
+            'Заяц',
+            'Слон',
+            'Курица',
+            'Выхухоль',
+            'Мышь',
+            'Хомяк',
+            'Тигр',
+            'Голубь',
+            'Страус',
+            'Кенгуру',
+            'Орёл',
+            'Улитка',
+            'Лев'
+        ];
+
+        let choiceA = document.getElementById('choice-a');
+        let choiceB = document.getElementById('choice-b');
+
+        let resultsdiv = document.getElementById('results');
+        let loadform = document.getElementById('load-form');
+        loadform.style.display = 'none';
+
+        let variantA, variantB;
+
+        let showLoadForm = false;
+
+        let dataset = null;
+
+        function loadData(d) {
+            dataset = new Array();
+
+            for(let item of d) {
+                dataset.push( { item: item, score: 0 } );
+            }
+        }
+
+        function loadFromText() {
+            let d = document.getElementById('load-text').value.split(',');
+
+            for(let i = 0; i < d.length; i++) {
+                d[i] = d[i].trim();
+            }
+
+            loadform.style.display = 'none';
+            loadData(d);
+            choose();
+        }
+
+        function letChoose() {
+            variantA = Math.floor( Math.random() * dataset.length );
+            variantB = null;
+            while( (variantB = Math.floor( Math.random() * dataset.length )) === variantA);
+
+            //console.log(`Random choice between: ${dataset[variantA].item} (${dataset[variantA].score}) and ${dataset[variantB].item} (${dataset[variantA].score})`);
+        }
+
+        function letChooseSmart() {
+            dataset.sort( (a,b) => { return (a.score < b.score) ? 1 : ((b.score < a.score) ? -1 : 0); } );
+
+            for(let i = 0; i < dataset.length; i++) {
+                let index1 = i;
+
+                for(let j = 0; j < dataset.length; j++) {
+                    if( dataset[i].score === dataset[j].score && i !== j ) {
+                        //console.log(`Smart choice between: ${dataset[i].item} (${dataset[i].score}) and ${dataset[j].item} (${dataset[j].score})`);
+
+                        variantA = i;
+                        variantB = j;
+
+                        return;
+                    }
+                }
+            }
+        }
+
+        function choose() {
+            resultsdiv.innerHTML = '';
+
+            let alg = Math.random();
+
+            if(alg > 0.8) {
+                letChooseSmart();
+            } else {
+                letChoose();
+            }      
+
+            choiceA.innerHTML = dataset[variantA].item;
+            choiceB.innerHTML = dataset[variantB].item;
+        }
+
+        function chosen(variant) {
+            if(variant === 'a') {
+                
+                dataset[variantA].score++;
+                dataset[variantB].score--;
+
+            } else if(variant === 'b') {
+                
+                dataset[variantA].score--;
+                dataset[variantB].score++;
+
+            }
+
+            choose();
+            
+        }
+
+        function getResults() {
+
+            if(resultsdiv.innerHTML !== '') {
+                resultsdiv.innerHTML = '';
+                return;
+            }
+
+            let barColor = 'rgba(0, 128, 128, .9)';
+            let barColor2 = 'rgba(0, 128, 128, .04)';
+            
+            dataset.sort( (a,b) => { return (a.score < b.score) ? 1 : ((b.score < a.score) ? -1 : 0); } );
+
+            resultsdiv.innerHTML = '';
+
+            let maxScore = dataset[0].score;
+            let minScore = dataset[0].score;
+
+            for(let item of dataset) {
+                if(item.score > maxScore)
+                    maxScore = item.score;
+
+                if(item.score < minScore)
+                    minScore = item.score;
+            }
+
+            let range = maxScore - minScore;
+
+            for(let item of dataset) {
+                let rating = (item.score - minScore) / range * 100;
+                resultsdiv.innerHTML += `<div class="res-item" style="background-image: linear-gradient(to right, ${barColor2} 0%, ${barColor2} ${rating}%, rgba(0, 0, 0, 0) ${rating}%, rgba(0, 0, 0, 0) 100%);">${item.item}</div><div class="res-bar" style="height: 2px; background-image: linear-gradient(to right, ${barColor} 0%, ${barColor} ${rating}%, rgba(0, 0, 0, 0) ${rating}%, rgba(0, 0, 0, 0) 100%);"></div>`;
+            }
+        }
+
+        function showhideLoadForm() {
+            if(loadform.style.display === 'none') {
+                loadform.style.display = 'block';
+            } else {
+                loadform.style.display = 'none';
+            }
+        }
+
+        loadData(data);
+
+        choose();
+    </script>
+</html>
+
