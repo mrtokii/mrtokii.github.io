@@ -24,6 +24,12 @@
                 cursor: pointer;
 
                 overflow: hidden;
+
+                -moz-user-select: none; 
+                -webkit-user-select: none; 
+                -ms-user-select:none; 
+                user-select:none;
+                -o-user-select:none;
             }
 
             #result-button, #load-toggle-button {
@@ -50,7 +56,7 @@
                 font-size: 24px; 
                 background: rgb(209, 175, 135);
                 color: black;
-                text-align: center;
+                
             }
 
             #wrapper {
@@ -101,6 +107,12 @@
                 
             }
 
+            .res-item {
+                padding: 6px;
+
+                text-align: left;
+            }
+
             @media (max-width: 600px) {
                 body {
                     padding: 0px;
@@ -120,12 +132,12 @@
 
                 .choice div {
                     width: 100%; 
-                    height: 200px;
+                    height: 160px;
                     text-align: center; 
                     font-size: 54px; 
                     font-weight: 100;
                     
-                    line-height: 180px;
+                    line-height: 150px;
 
                     cursor: pointer;
 
@@ -172,7 +184,7 @@
                 <div id="load-button" onclick="loadFromText()">Load</div>
             </div>
             <div id="load-toggle-button" onclick="showhideLoadForm()">Load data</div>
-            <div class="choice">
+            <div class="choice" unselectable="on" onselectstart="return false;">
                 <div style="background: teal; color: white;" onclick="chosen('a')"><span id="choice-a"></span></div>
                 <div style="background: brown; color: white;" onclick="chosen('b')"><span id="choice-b"></span></div>
             </div>
@@ -234,7 +246,7 @@
             variantB = null;
             while( (variantB = Math.floor( Math.random() * dataset.length )) === variantA);
 
-            console.log(`Random choice between: ${dataset[variantA].item} (${dataset[variantA].score}) and ${dataset[variantB].item} (${dataset[variantA].score})`);
+            //console.log(`Random choice between: ${dataset[variantA].item} (${dataset[variantA].score}) and ${dataset[variantB].item} (${dataset[variantA].score})`);
         }
 
         function letChooseSmart() {
@@ -245,7 +257,7 @@
 
                 for(let j = 0; j < dataset.length; j++) {
                     if( dataset[i].score === dataset[j].score && i !== j ) {
-                        console.log(`Smart choice between: ${dataset[i].item} (${dataset[i].score}) and ${dataset[j].item} (${dataset[j].score})`);
+                        //console.log(`Smart choice between: ${dataset[i].item} (${dataset[i].score}) and ${dataset[j].item} (${dataset[j].score})`);
 
                         variantA = i;
                         variantB = j;
@@ -261,7 +273,7 @@
 
             let alg = Math.random();
 
-            if(alg > 0.5) {
+            if(alg > 0.8) {
                 letChooseSmart();
             } else {
                 letChoose();
@@ -294,13 +306,30 @@
                 resultsdiv.innerHTML = '';
                 return;
             }
+
+            let barColor = 'rgba(0, 128, 128, .9)';
+            let barColor2 = 'rgba(0, 128, 128, .04)';
             
             dataset.sort( (a,b) => { return (a.score < b.score) ? 1 : ((b.score < a.score) ? -1 : 0); } );
 
             resultsdiv.innerHTML = '';
 
+            let maxScore = dataset[0].score;
+            let minScore = dataset[0].score;
+
             for(let item of dataset) {
-                resultsdiv.innerHTML += `${item.item} (${item.score}) <br />`;
+                if(item.score > maxScore)
+                    maxScore = item.score;
+
+                if(item.score < minScore)
+                    minScore = item.score;
+            }
+
+            let range = maxScore - minScore;
+
+            for(let item of dataset) {
+                let rating = (item.score - minScore) / range * 100;
+                resultsdiv.innerHTML += `<div class="res-item" style="background-image: linear-gradient(to right, ${barColor2} 0%, ${barColor2} ${rating}%, rgba(0, 0, 0, 0) ${rating}%, rgba(0, 0, 0, 0) 100%);">${item.item}</div><div class="res-bar" style="height: 2px; background-image: linear-gradient(to right, ${barColor} 0%, ${barColor} ${rating}%, rgba(0, 0, 0, 0) ${rating}%, rgba(0, 0, 0, 0) 100%);"></div>`;
             }
         }
 
