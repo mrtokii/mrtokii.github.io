@@ -1,0 +1,57 @@
+{"frames": [
+
+{
+	"filename": "bullet-hud",
+	"frame": {"x":0,"y":0,"w":7,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":7,"h":16},
+	"sourceSize": {"w":7,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "bullet",
+	"frame": {"x":7,"y":0,"w":8,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+	"sourceSize": {"w":8,"h":8},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "enemy-body",
+	"frame": {"x":15,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "enemy-shooting",
+	"frame": {"x":47,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "player-shooting",
+	"frame": {"x":79,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sprites.png",
+	"format": "RGBA8888",
+	"size": {"w":111,"h":32},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:15548efeaa05a80b374794ff6f784e3d:30f278b3cff3e22ab3e78d6cfd4f575c:1eabdf11f75e3a4fe3147baf7b5be24b$"
+}
+}

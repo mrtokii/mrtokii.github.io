@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Immersion</title>
+
+    <style>
+        @font-face {
+            font-family: 'arcade-classic';
+            src: url('res/ARCADECLASSIC.TTF');
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+            background: #222;
+        }
+
+        #canvas {
+            display: block;
+            padding: 0px;
+            margin: 0px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateZ(0) translateX(-50%) translateY(-50%) scaleX(1) scaleY(1);
+
+            /*filter: contrast(120%) brightness(150%) blur(0px) saturate(150%)*/;
+
+            border-radius: 0px;
+        }
+    </style>
+
+</head>
+<body>
+<canvas id="canvas" width="800px" height="600px">
+    Your browser does not support CANVAS
+</canvas>
+<script>
+    let canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    //canvas.width = 600;  // 1.5
+    //canvas.height = 450; // 1.5
+
+    canvas.width = 800;
+    canvas.height = 600;
+
+    context.moveTo(0, 0);
+    context.lineTo(canvas.width, canvas.height);
+    context.moveTo(canvas.width, 0);
+    context.lineTo(0, canvas.height);
+
+    context.strokeStyle = 'black';
+    context.lineWidth = 5;
+    context.stroke();
+</script>
+<script src="engine/mapManager.js"></script>
+<script src="engine/spriteManager.js"></script>
+<script src="engine/eventsManager.js"></script>
+<script src="engine/gameManager.js"></script>
+<script src="engine/physicManager.js"></script>
+<script src="engine/hudManager.js"></script>
+<script src="engine/scoreManager.js"></script>
+<script src="engine/entity.js"></script>
+
+<script src="res/scenes.js"></script>
+
+<script src="res/entities/player.js"></script>
+<script src="res/entities/trigger.js"></script>
+<script src="res/entities/bullet.js"></script>
+<script src="res/entities/enemyBullet.js"></script>
+<script src="res/entities/testBullet.js"></script>
+<script src="res/entities/enemy.js"></script>
+<script src="res/entities/enemyBody.js"></script>
+
+<script>
+
+    // Initialization
+
+    var levelBriefDuration = 3000;
+
+    var mm  = new mapManager();
+    var sm  = new spriteManager();
+    var em  = new eventsManager();
+    var pm  = new physicManager();
+    var gm  = new gameManager();
+    var hm  = new hudManager();
+    var scm = new scoreManager();
+
+    function getCurrentContext() { return context; }
+    function getCurrentCanvas() { return canvas; }
+    function getEventsManager() { return em; }
+    function getSpriteManager() { return sm; }
+    function getGameManager() { return gm; }
+    function getPhysicManager() { return pm; }
+    function getMapManager() { return mm; }
+    function getHudManager() { return hm; }
+    function getScoreManager() { return scm; }
+
+    function completedLevel(l) {
+        startLevel(l + 1);
+    }
+
+    function startLevel(l) {
+        if(l < gameScenes.length) {
+            getScoreManager().currentLevel = l;
+
+            getGameManager().clearScreen();
+            getHudManager().drawTitleText(gameScenes[l].title);
+            getHudManager().drawSubtitleText(gameScenes[l].subtitle);
+
+            setTimeout( () => {
+                getGameManager().loadScene(gameScenes[l]);
+            }, levelBriefDuration);
+
+        } else {
+
+            let totalScore = 0;
+            for(let s of getScoreManager().score) {
+                totalScore += s;
+            }
+
+            getGameManager().clearScreen();
+            getHudManager().drawTitleText('YOU HAVE COMPLETED THE GAME');
+            getHudManager().drawSubtitleText(`Your total score: ${totalScore}`);
+
+        }
+    }
+
+    // On game resources load
+    function resourcesLoaded() {
+
+        // Loading start level
+        startLevel(getScoreManager().currentLevel);
+    }
+
+    // Starting
+    getGameManager().loadResources();
+
+
+</script>
+</body>
+</html>
