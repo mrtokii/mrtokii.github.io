@@ -62,6 +62,7 @@
 <script src="engine/physicManager.js"></script>
 <script src="engine/hudManager.js"></script>
 <script src="engine/scoreManager.js"></script>
+<script src="engine/audioManager.js"></script>
 <script src="engine/entity.js"></script>
 
 <script src="res/scenes.js"></script>
@@ -78,7 +79,7 @@
 
     // Initialization
 
-    var levelBriefDuration = 3000;
+    var levelBriefDuration = 5000;
 
     var mm  = new mapManager();
     var sm  = new spriteManager();
@@ -86,6 +87,7 @@
     var pm  = new physicManager();
     var gm  = new gameManager();
     var hm  = new hudManager();
+    var am  = new audioManager();
     var scm = new scoreManager();
 
     function getCurrentContext() { return context; }
@@ -96,6 +98,7 @@
     function getPhysicManager() { return pm; }
     function getMapManager() { return mm; }
     function getHudManager() { return hm; }
+    function getAudioManager() { return am; }
     function getScoreManager() { return scm; }
 
     function completedLevel(l) {
@@ -104,6 +107,10 @@
 
     function startLevel(l) {
         if(l < gameScenes.length) {
+            getAudioManager().stopAll();
+            getAudioManager().play('res/sounds/videostalker.mp3', { looping: true });
+            getAudioManager().filter.frequency.value = 120;
+
             getScoreManager().currentLevel = l;
 
             getGameManager().clearScreen();
@@ -111,6 +118,7 @@
             getHudManager().drawSubtitleText(gameScenes[l].subtitle);
 
             setTimeout( () => {
+                getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
                 getGameManager().loadScene(gameScenes[l]);
             }, levelBriefDuration);
 

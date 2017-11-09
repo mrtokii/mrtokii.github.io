@@ -23,7 +23,7 @@ class EnemyBullet extends Entity {
     onTouchEntity(entity) {
         if(entity.name.includes('player')) {
             console.log(`KILLED U`);
-            //getGameManager().reloadScene();
+            getGameManager().reloadScene();
             this.kill();
         }
     }

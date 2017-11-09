@@ -120,6 +120,8 @@ class gameManager {
         } else {
             getGameManager().stopScene();
 
+            getAudioManager().frequencyRamp(120, 1);
+
             getHudManager().drawEndLevel(getScoreManager().currentScore(), gameScenes[getScoreManager().currentLevel].subtitle);
 
             setTimeout( getGameManager().levelCompleted, 20 );
@@ -175,24 +177,40 @@ class gameManager {
     }
 
     loadResources() {
+        console.log(`Loading resources:`);
+        getHudManager().drawLoadingScreen();
+
         getSpriteManager().loadAtlas('res/images/sprites.png', 'res/images/sprites.json');
         getEventsManager().setup(getCurrentCanvas());
+
+        getAudioManager().init();
+        getAudioManager().loadArray([
+            'res/sounds/videostalker.mp3',
+            'res/sounds/death.mp3',
+            'res/sounds/pickup.mp3',
+            'res/sounds/shot.mp3'
+        ]);
 
         setTimeout(this.loadResourcesFinish, 10);
     }
 
     loadResourcesFinish() {
-        console.log(`Loading resources:`);
-         let jobs = 2;
+        //console.log(`Loading resources:`);
+         let jobs = 3;
 
         if( getSpriteManager().jsonLoaded ) {
             jobs--;
-            console.log(`[R]: Atlas JSON loaded`);
+            //console.log(`[R]: Atlas JSON loaded`);
         }
 
         if( getSpriteManager().imageLoaded ) {
             jobs--;
-            console.log(`[R]: Atlas image loaded`);
+            //console.log(`[R]: Atlas image loaded`);
+        }
+
+        if( getAudioManager().loaded ) {
+            jobs--;
+            //console.log(`[R]: Sounds loaded`);
         }
 
         if( jobs === 0 ) {

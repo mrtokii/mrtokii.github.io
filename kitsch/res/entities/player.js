@@ -29,6 +29,7 @@ class Player extends Entity {
             if(entity.ammo !== 0) {
                 this.ammo += entity.ammo;
                 entity.ammo = 0;
+                getAudioManager().play('res/sounds/pickup.mp3');
             }
         } else if(entity.name.includes('trigger_levelend')) {
             console.log('Completed the level!');
@@ -60,6 +61,8 @@ class Player extends Entity {
             getGameManager().entities.push(bullet);
 
             this.ammo--;
+
+            getAudioManager().play('res/sounds/shot.mp3');
 
             this.canFire = false;
             setTimeout( () => { getGameManager().player.canFire = true; }, bullet.delay);

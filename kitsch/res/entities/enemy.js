@@ -73,6 +73,8 @@ class Enemy extends Entity {
 
             getGameManager().entities.push(bullet);
 
+            getAudioManager().playWorldSound('res/sounds/shot.mp3', this.posX, this.posY);
+
             this.canFire = false;
             setTimeout( () => {
                 let entity = getGameManager().entity(this.name);

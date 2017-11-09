@@ -25,6 +25,7 @@ class Bullet extends Entity {
             let e = getGameManager().entity(entity.name);
             if(e !== null) {
                 getScoreManager().enemyKilled(entity.difficulty);
+                getAudioManager().playWorldSound('res/sounds/death.mp3', entity.posX, entity.posY);
                 e.kill();
             }
             this.kill();

@@ -68,5 +68,11 @@ class hudManager {
         this.drawPressFireText();
     }
 
+    drawLoadingScreen() {
+        getGameManager().clearScreen();
+        this.drawTitleText(`Loading`);
+        this.drawSubtitleText(`Please wait`);
+    }
+
 
 }

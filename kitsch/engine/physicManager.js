@@ -27,10 +27,10 @@ class physicManager {
             obj.onTouchEntity(e);
         }
 
-        if(ts !== 7 && obj.onTouchMap)
+        if(!this.walkable(ts) && obj.onTouchMap)
             obj.onTouchMap(ts);
 
-        if(ts === 7/* && e === null*/) {
+        if(this.walkable(ts)/* && e === null*/) {
             obj.posX = newX;
             obj.posY = newY;
         } else {
@@ -38,6 +38,17 @@ class physicManager {
         }
 
         return 'move';
+    }
+
+    walkable(idx) {
+        let blocks = gameScenes[getScoreManager().currentLevel].walkable;
+
+        for(let block of blocks) {
+            if( idx === block )
+                return true;
+        }
+
+        return false;
     }
 
     entityAtXY(obj, x, y) {
