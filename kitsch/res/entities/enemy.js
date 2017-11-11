@@ -15,7 +15,7 @@ class Enemy extends Entity {
         this.canTestFire = true;
         this.noObstacles = false;
 
-        this.spotRadius = 400;
+        this.spotRadius = 200;
         this.minSpotRadius = 200;
     }
 
@@ -30,7 +30,7 @@ class Enemy extends Entity {
     update() {
         let distanceToPlayer = Math.sqrt( Math.pow(this.posX - getGameManager().player.posX, 2) + Math.pow(this.posY - getGameManager().player.posY, 2) );
 
-        if( distanceToPlayer < this.minSpotRadius + 200 * this.difficulty && distanceToPlayer > 32) {
+        if( distanceToPlayer < this.minSpotRadius + this.spotRadius * this.difficulty && distanceToPlayer > 32) {
 
             let playerDelta = {
                 x: getGameManager().player.posX - this.posX,
@@ -116,8 +116,15 @@ class Enemy extends Entity {
     }
 
     kill() {
-        let deathSounds = [ 'res/sounds/death.mp3', 'res/sounds/death2.mp3', 'res/sounds/death3.mp3' ];
-        getAudioManager().play(deathSounds[Math.floor(Math.random() * 2)]);
+        let deathSounds = [
+            'res/sounds/death.mp3',
+            'res/sounds/death2.mp3',
+            'res/sounds/death3.mp3',
+            'res/sounds/death4.mp3',
+            'res/sounds/death5.mp3',
+            'res/sounds/death.mp3'
+        ];
+        getAudioManager().play(deathSounds[Math.floor(Math.random() * 5)]);
 
         let body = new EnemyBody();
         body.name = 'ebody' + (++getGameManager().fireNum);

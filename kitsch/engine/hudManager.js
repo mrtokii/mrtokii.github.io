@@ -78,7 +78,7 @@ class hudManager {
     }
 
     drawLevelHint(hint) {
-        getCurrentContext().fillStyle = 'yellow';
+        getCurrentContext().fillStyle = '#004a8f';
         this.drawText(hint, 18, getCurrentCanvas().width / 2, getCurrentCanvas().height - 30, 'bottom');
     }
 

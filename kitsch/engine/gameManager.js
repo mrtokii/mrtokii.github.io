@@ -216,7 +216,16 @@ class gameManager {
             'res/sounds/death.mp3',
             'res/sounds/death2.mp3',
             'res/sounds/death3.mp3',
+            'res/sounds/death4.mp3',
+            'res/sounds/death5.mp3',
             'res/sounds/pickup.mp3',
+            'res/sounds/miss.mp3',
+            'res/sounds/miss2.mp3',
+            'res/sounds/miss3.mp3',
+            'res/sounds/miss4.mp3',
+            'res/sounds/miss5.mp3',
+            'res/sounds/miss6.mp3',
+            'res/sounds/miss7.mp3',
             'res/sounds/shot.mp3'
         ]);
 

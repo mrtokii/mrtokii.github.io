@@ -31,6 +31,17 @@ class EnemyBullet extends Entity {
                 getGameManager().reloadScene();
                 this.kill();
             } else {
+                let missSounds = [
+                    'res/sounds/miss.mp3',
+                    'res/sounds/miss2.mp3',
+                    'res/sounds/miss3.mp3',
+                    'res/sounds/miss4.mp3',
+                    'res/sounds/miss5.mp3',
+                    'res/sounds/miss6.mp3',
+                    'res/sounds/miss7.mp3',
+                    'res/sounds/miss.mp3'
+                ];
+                getAudioManager().play(missSounds[Math.floor(Math.random() * 7)]);
                 //console.log(`Almost killed: ${dist}!`);
             }
 
