@@ -2,12 +2,11 @@ class Player extends Entity {
     constructor() {
         super();
 
-        this.health = 0;
-        this.ammo = 10;
+        this.ammo = 6;
 
         this.moveX = 0;
         this.moveY = 0;
-        this.speed = 4;
+        this.speed = 5;
 
         this.canFire = true;
     }
@@ -46,7 +45,7 @@ class Player extends Entity {
             let bullet = new Bullet();
 
             bullet.sizeX = 8;
-            bullet.sizeY = 8;
+            bullet.sizeY = 4;
 
             bullet.name = 'bullet' + (++getGameManager().fireNum);
 
@@ -63,6 +62,7 @@ class Player extends Entity {
             this.ammo--;
 
             getAudioManager().play('res/sounds/shot.mp3');
+            getScoreManager().shotFired();
 
             this.canFire = false;
             setTimeout( () => { getGameManager().player.canFire = true; }, bullet.delay);

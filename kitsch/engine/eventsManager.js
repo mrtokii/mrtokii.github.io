@@ -12,6 +12,7 @@ class eventsManager {
         this.bind[68] = 'right';
         this.bind[32] = 'fire';
         this.bind[82] = 'restart';
+        this.bind[80] = 'pause';
 
         window.addEventListener('mousedown', this.onMouseDown);
         window.addEventListener('mouseup', this.onMouseUp);

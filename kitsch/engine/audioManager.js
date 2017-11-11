@@ -6,7 +6,7 @@ class audioManager {
         this.loaded = false;
         this.filter = null;
 
-        this.defaultFrequency = 7000;
+        this.defaultFrequency = 6600;
     }
 
     init() {
@@ -49,6 +49,7 @@ class audioManager {
                     clip.buffer = buffer;
                     clip.loaded = true;
                     callback(clip);
+                    console.log(`loaded clip: ${clip.path}`);
                 }
             );
         };
@@ -59,16 +60,16 @@ class audioManager {
     loadArray(array) {
         for(let sound of array) {
 
-            getAudioManager().load(sound, function() {
+            this.load(sound, function() {
 
                 if(array.length === Object.keys(getAudioManager().clips).length) {
+                    //console.log(`invoked all`);
                     for(let sd in getAudioManager().clips) {
                         if(!getAudioManager().clips[sd].loaded) {
                             return;
                         }
-
-                        getAudioManager().loaded = true;
                     }
+                    getAudioManager().loaded = true;
                 }
 
             });
@@ -95,6 +96,7 @@ class audioManager {
 
         if(sd === null)
             return false;
+
         let sound = this.context.createBufferSource();
         sound.buffer = sd.buffer;
         sound.connect(getAudioManager().filter);

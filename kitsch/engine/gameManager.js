@@ -7,6 +7,8 @@ class gameManager {
         this.laterKill = [];
 
         this.worldUpdateTimer = null;
+
+        this.pause = false;
     }
 
     initPlayer(obj) {
@@ -22,38 +24,63 @@ class gameManager {
             return;
         }
 
-        //console.log(`Update world`);
+        if(getEventsManager().action['pause']) {
 
-        this.player.moveX = 0;
-        this.player.moveY = 0;
-
-        if(getEventsManager().action['up']) this.player.moveY = -1;
-        if(getEventsManager().action['down']) this.player.moveY = 1;
-        if(getEventsManager().action['left']) this.player.moveX = -1;
-        if(getEventsManager().action['right']) this.player.moveX = 1;
-
-        if(getEventsManager().action['fire']) this.player.fire();
-
-        if(getEventsManager().action['restart']) {
-            this.reloadScene();
-            getEventsManager().action['restart'] = false;
+            this.togglePause();
+            getEventsManager().action['pause'] = false;
         }
 
-        for(let entity of this.entities) {
-            try { entity.update(); } catch(ex) { console.log(`Error updating entity ${entity.name}`); }
+        if(!this.pause) {
+
+            //console.log(`Update world`);
+
+            this.player.moveX = 0;
+            this.player.moveY = 0;
+
+            if(getEventsManager().action['up']) this.player.moveY = -1;
+            if(getEventsManager().action['down']) this.player.moveY = 1;
+            if(getEventsManager().action['left']) this.player.moveX = -1;
+            if(getEventsManager().action['right']) this.player.moveX = 1;
+
+            if(getEventsManager().action['fire']) this.player.fire();
+
+            if(getEventsManager().action['restart']) {
+                this.reloadScene();
+                getEventsManager().action['restart'] = false;
+            }
+
+            for(let entity of this.entities) {
+                try { entity.update(); } catch(ex) { console.log(`Error updating entity ${entity.name}`); }
+            }
+
+            for(let i = 0; i < this.laterKill.length; i++) {
+                let idx = this.entities.indexOf(this.laterKill[i]);
+                if(idx > -1)
+                    this.entities.splice(idx, 1);
+            }
+
+            if(this.laterKill.length > 0) {
+                this.laterKill.length = 0;
+            }
+
+            this.draw(getCurrentContext());
         }
 
-        for(let i = 0; i < this.laterKill.length; i++) {
-            let idx = this.entities.indexOf(this.laterKill[i]);
-            if(idx > -1)
-                this.entities.splice(idx, 1);
-        }
+    }
 
-        if(this.laterKill.length > 0) {
-            this.laterKill.length = 0;
+    togglePause() {
+        if(this.pause) {
+            console.log(`UNPAUSE`);
+            getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
+            this.pause = false;
+        } else {
+            console.log(`PAUSE`);
+            getAudioManager().frequencyRamp(140, 1);
+            //getGameManager().clearScreen();
+            getHudManager().drawTitleText('Pause');
+            getHudManager().drawSubtitleText('Press  \`P\`  to  continue');
+            this.pause = true;
         }
-
-        this.draw(getCurrentContext());
     }
 
     entity(name) {
@@ -119,11 +146,9 @@ class gameManager {
 
         } else {
             getGameManager().stopScene();
-
-            getAudioManager().frequencyRamp(120, 1);
-
-            getHudManager().drawEndLevel(getScoreManager().currentScore(), gameScenes[getScoreManager().currentLevel].subtitle);
-
+            getAudioManager().frequencyRamp(140, 1);
+            getHudManager().drawHero('endlevel');
+            getHudManager().drawEndLevel();
             setTimeout( getGameManager().levelCompleted, 20 );
         }
 
@@ -185,8 +210,12 @@ class gameManager {
 
         getAudioManager().init();
         getAudioManager().loadArray([
-            'res/sounds/videostalker.mp3',
+            'res/sounds/timecop-loop.mp3',
+            'res/sounds/pacemaker-loop.mp3',
+            'res/sounds/riot-loop.mp3',
             'res/sounds/death.mp3',
+            'res/sounds/death2.mp3',
+            'res/sounds/death3.mp3',
             'res/sounds/pickup.mp3',
             'res/sounds/shot.mp3'
         ]);
@@ -223,7 +252,7 @@ class gameManager {
     }
 
     play() {
-        this.worldUpdateTimer = setInterval(updateWorld, 20);
+        this.worldUpdateTimer = setInterval(updateWorld, gameSpeed);
     }
 
 }

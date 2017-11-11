@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="left-up" width="20" height="20" tilewidth="32" tileheight="32" nextobjectid="16">
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="../images/tileset.png" width="256" height="256"/>
+ </tileset>
+ <layer name="background" width="20" height="20">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,10,43,43,12,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,2,26,43,43,25,4,1,1,1,1,1,1,1,
+1,1,1,1,1,1,2,26,43,43,43,43,25,4,1,1,1,1,1,1,
+1,1,1,1,1,2,26,43,11,11,11,11,43,25,4,1,1,1,1,1,
+1,1,1,1,2,26,43,11,11,11,11,11,11,43,25,4,1,1,1,1,
+1,1,1,2,26,43,11,59,60,11,11,59,60,11,43,25,4,1,1,1,
+1,1,2,26,43,11,11,57,58,11,11,57,58,11,11,43,25,4,1,1,
+1,1,10,43,11,11,11,11,11,11,11,11,11,11,11,11,43,12,1,1,
+1,1,10,43,11,11,11,11,11,11,11,11,11,11,11,11,43,12,1,1,
+1,1,18,28,43,11,11,59,60,11,11,59,60,11,11,43,27,20,1,1,
+1,1,1,18,28,43,11,57,58,11,11,57,58,11,43,27,20,1,1,1,
+1,1,1,1,18,28,43,11,11,11,11,11,11,43,27,20,1,1,1,1,
+1,1,1,1,1,18,28,43,11,11,11,11,43,27,20,1,1,1,1,1,
+1,1,1,1,1,1,18,28,43,11,11,43,27,20,1,1,1,1,1,1,
+1,1,1,1,1,1,1,18,28,43,43,27,20,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,10,43,43,12,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,18,19,19,20,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="1" name="player" type="Player" gid="9" x="306" y="542.667" width="32" height="32">
+   <properties>
+    <property name="ammo" type="int" value="8"/>
+   </properties>
+  </object>
+  <object id="3" name="enemy3" type="Enemy" gid="17" x="192.667" y="354" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.4"/>
+   </properties>
+  </object>
+  <object id="5" name="enemy5" type="Enemy" gid="17" x="398.667" y="346.667" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.4"/>
+   </properties>
+  </object>
+  <object id="6" name="enemy12" type="Enemy" gid="17" x="384.667" y="220.667" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.4"/>
+   </properties>
+  </object>
+  <object id="7" name="enemy11" type="Enemy" gid="17" x="230" y="222" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.4"/>
+   </properties>
+  </object>
+  <object id="8" name="enemy9" type="Enemy" gid="17" x="188.667" y="270.667" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.4"/>
+   </properties>
+  </object>
+  <object id="9" name="enemy8" type="Enemy" gid="17" x="431.333" y="314.667" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.4"/>
+   </properties>
+  </object>
+  <object id="12" name="enemy7" type="Enemy" gid="17" x="160" y="308" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.4"/>
+   </properties>
+  </object>
+  <object id="13" name="enemy10" type="Enemy" gid="17" x="431.333" y="272" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.4"/>
+   </properties>
+  </object>
+  <object id="14" name="trigger_levelend" type="PlayerTrigger" gid="13" x="288.667" y="73.3333" width="32" height="32"/>
+  <object id="15" name="trigger_levelend" type="PlayerTrigger" gid="13" x="320" y="72.6667" width="32" height="32"/>
+ </objectgroup>
+</map>

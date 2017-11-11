@@ -1,29 +1,34 @@
-class Scene {
-    constructor() {
-        this.sceneName = '';
-        this.title = '';
-        this.subtitle = '';
-        this.map = '';
-        this.walkable = [];
+var gameScenes = [
+    {
+        sceneName: 'the-running-man',
+        title: 'PART  I:  THE  RUNNING  MAN',
+        subtitle: 'Almost  ten  years  after  my \nretirement  they  found  me.',
+        map: 'trm.json',
+        music: 'res/sounds/timecop-loop.mp3',
+        hero: 'hero-1',
+        hint: 'ESCAPE THE CLUB',
+        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
+    },
+
+    {
+        sceneName: 'bloodshedin',
+        title: 'PART  II:  BLOODSHEDIN\'',
+        subtitle: 'They  killed  Charles.  He  was  my  best  friend.  \nIt  doesn\'t  matter  that  he  was  a  cat. \nBig  Ronald\'s  gotta  pay  for  this.',
+        map: 'bloodshedin.json',
+        music: 'res/sounds/pacemaker-loop.mp3',
+        hero: 'hero-2',
+        hint: 'ESCAPE THE BUILDING',
+        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
+    },
+
+    {
+        sceneName: 'ambush',
+        title: 'PART  III:  AMBUSH',
+        subtitle: 'Everything  goes  wrong...',
+        map: 'ambush.json',
+        music: 'res/sounds/riot-loop.mp3',
+        hero: 'hero-3',
+        hint: 'ESCAPE THE BUILDING',
+        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
     }
-}
-
-var gameScenes = [];
-
-let intro = new Scene();
-intro.sceneName = 'intro';
-intro.title = 'Chapter I';
-intro.subtitle = 'Tutorial';
-intro.map = 'intro.json';
-intro.walkable = [7];
-
-let disco = new Scene();
-disco.sceneName = 'disco';
-disco.title = 'Chapter II';
-disco.subtitle = 'aye';
-disco.map = 'disco.json';
-disco.walkable = [7];
-
-gameScenes.push(intro);
-gameScenes.push(disco);
-
+];

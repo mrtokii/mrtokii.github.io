@@ -39,7 +39,7 @@ class hudManager {
         ctx.font = `${size}px arcade-classic`;
         ctx.textBaseline = baseline;
         context.textAlign = 'center';
-        ctx.fillStyle = 'white';
+        //ctx.fillStyle = 'white';
 
         let lineheight = size;
         let lines = text.split('\n');
@@ -51,27 +51,49 @@ class hudManager {
     }
 
     drawTitleText(text) {
+        getCurrentContext().fillStyle = 'white';
         this.drawText(text, 30, getCurrentCanvas().width / 2, getCurrentCanvas().height / 2, 'bottom');
     }
 
     drawSubtitleText(text) {
+        getCurrentContext().fillStyle = 'white';
         this.drawText(text, 20, getCurrentCanvas().width / 2, getCurrentCanvas().height / 2, 'top');
     }
 
     drawPressFireText() {
-        this.drawText('Press fire button', 18, getCurrentCanvas().width / 2, getCurrentCanvas().height - 30, 'bottom');
+        getCurrentContext().fillStyle = 'white';
+        this.drawText('Press  fire  button', 18, getCurrentCanvas().width / 2, getCurrentCanvas().height - 30, 'bottom');
     }
 
-    drawEndLevel(score, levelName) {
-        this.drawTitleText(`Score:  ${score}`);
-        this.drawSubtitleText(`${levelName}  completed!`);
+    drawEndLevel() {
+        this.drawTitleText(`Great  job!`);
+        this.drawSubtitleText(`Enemies  killed:  ${getScoreManager().currentKills()}\nShots  fired:  ${getScoreManager().currentShots()}\n---------------------------\nTotal  score:  ${getScoreManager().currentScore()}`);
         this.drawPressFireText();
     }
 
     drawLoadingScreen() {
         getGameManager().clearScreen();
         this.drawTitleText(`Loading`);
-        this.drawSubtitleText(`Please wait`);
+        this.drawSubtitleText(`Please  wait`);
+    }
+
+    drawLevelHint(hint) {
+        getCurrentContext().fillStyle = 'yellow';
+        this.drawText(hint, 18, getCurrentCanvas().width / 2, getCurrentCanvas().height - 30, 'bottom');
+    }
+
+    drawHero(spritename) {
+        let sprite = getSpriteManager().getSprite(spritename);
+        getCurrentContext().drawImage(getSpriteManager().image,
+            sprite.x,
+            sprite.y,
+            sprite.w,
+            sprite.h,
+            getCurrentCanvas().width / 2 - 150,
+            getCurrentCanvas().height / 2 - 120,
+            300,
+            85
+        );
     }
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Immersion</title>
+    <title>Kitsch</title>
 
     <style>
         @font-face {
@@ -13,7 +13,13 @@
         body {
             padding: 0px;
             margin: 0px;
-            background: #222;
+            /*background: #222;*/
+
+            background-color: black;
+            background-image: url(res/images/kitsch-background.jpg);
+            background-position-x: center;
+            background-position-y: center;
+            background-repeat: no-repeat;
         }
 
         #canvas {
@@ -23,28 +29,100 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translateZ(0) translateX(-50%) translateY(-50%) scaleX(1) scaleY(1);
+            transform: translateZ(0) translateX(-50%) translateY(-50%) scaleX(1.25) scaleY(1.25);
 
-            /*filter: contrast(120%) brightness(150%) blur(0px) saturate(150%)*/;
+            filter: contrast(105%) brightness(120%) blur(0px) saturate(130%);
 
-            border-radius: 0px;
+            border-radius: 15px;
+
+            -webkit-box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
+            -moz-box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
+            box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
+
+        }
+
+        #wrapper, #overlay {
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+
+            background-position-x: center;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            background-color: black;
+        }
+
+        #wrapper {
+            background-image: url(res/images/kitsch-background.jpg);
+        }
+
+        #overlay {
+            background-image: url(res/images/kitsch-logo-help.jpg);
+            background-size: contain;
+        }
+
+        #overlay #ok-button {
+            display: block;
+            position: absolute;
+            bottom: 20px;
+            margin: 10px;
+            padding: 10px 50px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            font: 28px 'arcade-classic', 'Impact';
+            cursor: pointer;
+            border-radius: 8px;
+
+            background: #ab2c9e;
+        }
+
+        #overlay #ok-button:hover {
+            background: #e437d2;
+        }
+
+        #info {
+            display: block;
+            position: absolute;
+            bottom: 5px;
+            margin: 0px;
+            padding: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            font: 8px 'Arial', 'Impact';
+            color: #e437d2;
         }
     </style>
 
 </head>
 <body>
-<canvas id="canvas" width="800px" height="600px">
-    Your browser does not support CANVAS
-</canvas>
+<div id="wrapper">
+    <canvas id="canvas" width="800px" height="600px">
+        Your browser does not support CANVAS
+    </canvas>
+</div>
+
+<div id="overlay">
+    <span id="ok-button" onclick="launch();">
+        LAUNCH
+    </span>
+</div>
+
+<span id="info">
+    V0.17.11.11 - MADE BY MRTOKII - ALL SONGS ARE STOLEN - ENJOY IT
+</span>
 <script>
     let canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
 
-    //canvas.width = 600;  // 1.5
-    //canvas.height = 450; // 1.5
+    canvas.width = 640;  // 1.25
+    canvas.height = 480; // 1.25
 
-    canvas.width = 800;
-    canvas.height = 600;
+    //canvas.width = 800;
+    //canvas.height = 600;
 
     context.moveTo(0, 0);
     context.lineTo(canvas.width, canvas.height);
@@ -79,7 +157,8 @@
 
     // Initialization
 
-    var levelBriefDuration = 5000;
+    var levelBriefDuration = 8000;
+    var gameSpeed = 20;
 
     var mm  = new mapManager();
     var sm  = new spriteManager();
@@ -108,14 +187,16 @@
     function startLevel(l) {
         if(l < gameScenes.length) {
             getAudioManager().stopAll();
-            getAudioManager().play('res/sounds/videostalker.mp3', { looping: true });
-            getAudioManager().filter.frequency.value = 120;
+            getAudioManager().play(gameScenes[l].music, { looping: true });
+            getAudioManager().filter.frequency.value = 140;
 
             getScoreManager().currentLevel = l;
 
             getGameManager().clearScreen();
+            getHudManager().drawHero(gameScenes[l].hero);
             getHudManager().drawTitleText(gameScenes[l].title);
             getHudManager().drawSubtitleText(gameScenes[l].subtitle);
+            getHudManager().drawLevelHint(gameScenes[l].hint)
 
             setTimeout( () => {
                 getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
@@ -130,7 +211,8 @@
             }
 
             getGameManager().clearScreen();
-            getHudManager().drawTitleText('YOU HAVE COMPLETED THE GAME');
+            getHudManager().drawHero('endlevel');
+            getHudManager().drawTitleText('TO  BE  CONTINUED...');
             getHudManager().drawSubtitleText(`Your total score: ${totalScore}`);
 
         }
@@ -140,11 +222,26 @@
     function resourcesLoaded() {
 
         // Loading start level
-        startLevel(getScoreManager().currentLevel);
+        setTimeout( () => { startLevel(getScoreManager().currentLevel) }, 100 );
+
+        console.log('loaded all');
+        //getHudManager().drawHero('endlevel');
+    }
+
+    function launch() {
+        let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        if(!isChrome) {
+            alert(`Please use Google Chrome.`);
+        } else {
+            getGameManager().loadResources();
+            document.getElementById('overlay').style.display = 'none';
+        }
     }
 
     // Starting
-    getGameManager().loadResources();
+    //launch();
+    //document.getElementById('overlay').style.display = 'none';
+
 
 
 </script>

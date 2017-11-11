@@ -2,7 +2,6 @@ class Enemy extends Entity {
     constructor() {
         super();
 
-        this.health = 0;
         this.ammo = 0;
 
         this.moveX = 0;
@@ -16,17 +15,22 @@ class Enemy extends Entity {
         this.canTestFire = true;
         this.noObstacles = false;
 
-        this.spotRadius = 300;
+        this.spotRadius = 400;
+        this.minSpotRadius = 200;
     }
 
     draw() {
-        sm.drawSprite(context, 'enemy-shooting', this.posX, this.posY, this.angle);
+        if(this.difficulty >= 0.5) {
+            sm.drawSprite(context, 'enemy-shooting2', this.posX, this.posY, this.angle);
+        } else {
+            sm.drawSprite(context, 'enemy-shooting', this.posX, this.posY, this.angle);
+        }
     }
 
     update() {
         let distanceToPlayer = Math.sqrt( Math.pow(this.posX - getGameManager().player.posX, 2) + Math.pow(this.posY - getGameManager().player.posY, 2) );
 
-        if( distanceToPlayer < this.spotRadius && distanceToPlayer > 32) {
+        if( distanceToPlayer < this.minSpotRadius + 200 * this.difficulty && distanceToPlayer > 32) {
 
             let playerDelta = {
                 x: getGameManager().player.posX - this.posX,
@@ -36,7 +40,7 @@ class Enemy extends Entity {
             if(this.angle < 0)
                 this.angle += Math.PI * 2;
 
-            this.speed = 1;
+            this.speed = 3 * this.difficulty;
             this.testFire();
 
             if(this.noObstacles) {
@@ -59,7 +63,7 @@ class Enemy extends Entity {
             let bullet = new EnemyBullet();
 
             bullet.sizeX = 8;
-            bullet.sizeY = 8;
+            bullet.sizeY = 4;
 
             bullet.name = 'ebullet' + (++getGameManager().fireNum);
 
@@ -89,7 +93,7 @@ class Enemy extends Entity {
             let sampleBullet = new TestBullet();
 
             sampleBullet.sizeX = 8;
-            sampleBullet.sizeY = 8;
+            sampleBullet.sizeY = 4;
 
             sampleBullet.name = 'tbullet' + (++getGameManager().fireNum);
 
@@ -112,13 +116,18 @@ class Enemy extends Entity {
     }
 
     kill() {
+        let deathSounds = [ 'res/sounds/death.mp3', 'res/sounds/death2.mp3', 'res/sounds/death3.mp3' ];
+        getAudioManager().play(deathSounds[Math.floor(Math.random() * 2)]);
+
         let body = new EnemyBody();
         body.name = 'ebody' + (++getGameManager().fireNum);
         body.angle = this.angle - Math.PI;
-        body.sizeX = 32;
-        body.sizeY = 32;
+        body.sizeX = 43;
+        body.sizeY = 19;
         body.posX = this.posX;
         body.posY = this.posY;
+        body.difficulty = this.difficulty;
+        body.ammo = (Math.random() < body.difficulty ) ? 2 : 1;
 
         getGameManager().entities.unshift(body);
 

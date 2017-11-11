@@ -5,11 +5,11 @@ class EnemyBullet extends Entity {
         this.moveX = 0;
         this.moveY = 0;
 
-        this.delay = 800;
+        this.delay = 600;
 
         this.angle = 0;
 
-        this.speed = 4;
+        this.speed = 12;
     }
 
     draw() {
@@ -22,9 +22,18 @@ class EnemyBullet extends Entity {
 
     onTouchEntity(entity) {
         if(entity.name.includes('player')) {
-            console.log(`KILLED U`);
-            getGameManager().reloadScene();
-            this.kill();
+
+
+
+            let dist = Math.sqrt(Math.pow( (this.posX + this.sizeX/2) - (entity.posX + entity.sizeX/2), 2) + Math.pow( (this.posY + this.sizeY/2) - (entity.posY + entity.sizeY/2) , 2));
+            if( dist < 14 ) {
+                console.log(`KILLED PLAYER`);
+                getGameManager().reloadScene();
+                this.kill();
+            } else {
+                //console.log(`Almost killed: ${dist}!`);
+            }
+
         }
     }
 

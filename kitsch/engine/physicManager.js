@@ -18,9 +18,13 @@ class physicManager {
             newY = obj.posY + Math.sin(obj.angle) * obj.speed;
         }
 
+        let newCenterX = Math.floor(newX + obj.sizeX / 2.0);
+        let newCenterY = Math.floor(newY + obj.sizeY / 2.0);
 
-        let ts = getMapManager().getTilesetIdx(Math.floor(newX + obj.sizeX / 2.0), Math.floor(newY + obj.sizeY / 2.0));
-        //console.log(`COODRS: ${Math.floor(newX + obj.sizeX / 2.0)}, ${Math.floor(newY + obj.sizeY / 2.0)}`);
+        let ts = getMapManager().getTilesetIdx(newCenterX, newCenterY);
+        let tsX = getMapManager().getTilesetIdx(newCenterX, Math.floor(obj.posY + obj.sizeY / 2.0));
+        let tsY = getMapManager().getTilesetIdx(Math.floor(obj.posX + obj.sizeX / 2.0), newCenterY);
+
         let e = this.entityAtXY(obj, newX, newY);
 
         if(e !== null && obj.onTouchEntity) {
@@ -32,6 +36,10 @@ class physicManager {
 
         if(this.walkable(ts)/* && e === null*/) {
             obj.posX = newX;
+            obj.posY = newY;
+        } else if(this.walkable(tsX)) {
+            obj.posX = newX;
+        } else if(this.walkable(tsY)) {
             obj.posY = newY;
         } else {
             return 'break';
