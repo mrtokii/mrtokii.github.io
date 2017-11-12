@@ -9,7 +9,7 @@ class EnemyBullet extends Entity {
 
         this.angle = 0;
 
-        this.speed = 12;
+        this.speed = 13;
     }
 
     draw() {
@@ -26,9 +26,13 @@ class EnemyBullet extends Entity {
 
 
             let dist = Math.sqrt(Math.pow( (this.posX + this.sizeX/2) - (entity.posX + entity.sizeX/2), 2) + Math.pow( (this.posY + this.sizeY/2) - (entity.posY + entity.sizeY/2) , 2));
-            if( dist < 14 ) {
-                console.log(`KILLED PLAYER`);
-                getGameManager().reloadScene();
+            if( dist < 15 ) {
+
+                if(!getGameManager().cheats.baguvix) {
+                    console.log(`KILLED PLAYER`);
+                    getGameManager().reloadScene();
+                }
+
                 this.kill();
             } else {
                 let missSounds = [

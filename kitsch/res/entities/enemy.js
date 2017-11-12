@@ -30,7 +30,7 @@ class Enemy extends Entity {
     update() {
         let distanceToPlayer = Math.sqrt( Math.pow(this.posX - getGameManager().player.posX, 2) + Math.pow(this.posY - getGameManager().player.posY, 2) );
 
-        if( distanceToPlayer < this.minSpotRadius + this.spotRadius * this.difficulty && distanceToPlayer > 32) {
+        if( distanceToPlayer < this.minSpotRadius + this.spotRadius * this.difficulty && distanceToPlayer > 0) {
 
             let playerDelta = {
                 x: getGameManager().player.posX - this.posX,
@@ -83,7 +83,7 @@ class Enemy extends Entity {
             setTimeout( () => {
                 let entity = getGameManager().entity(this.name);
                 if(entity !== null) entity.canFire = true;
-            }, bullet.delay);
+            }, Math.floor(bullet.delay - 400 * getGameManager().entity(this.name).difficulty));
         }
 
     }
@@ -110,7 +110,7 @@ class Enemy extends Entity {
             setTimeout( () => {
                 let entity = getGameManager().entity(this.name);
                 if(entity !== null) entity.canTestFire = true;
-            }, sampleBullet.delay);
+            }, Math.floor(sampleBullet.delay - 150 * getGameManager().entity(this.name).difficulty));
         }
 
     }

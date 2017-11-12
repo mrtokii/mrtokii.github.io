@@ -116,7 +116,7 @@
 </div>
 
 <span id="info">
-    V0.17.11.11 - MADE BY MRTOKII - ALL SONGS ARE STOLEN - ENJOY IT
+    V0.17.11.12 - MADE BY MRTOKII - ALL SONGS ARE STOLEN - ENJOY IT
 </span>
 <script>
     let canvas = document.getElementById('canvas');
@@ -192,7 +192,7 @@
         if(l < gameScenes.length) {
             getAudioManager().stopAll();
             getAudioManager().play(gameScenes[l].music, { looping: true });
-            getAudioManager().filter.frequency.value = 140;
+            getAudioManager().filter.frequency.value = getAudioManager().lowFrequency;
 
             getScoreManager().currentLevel = l;
 

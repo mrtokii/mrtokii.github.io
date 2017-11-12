@@ -7,6 +7,7 @@ class audioManager {
         this.filter = null;
 
         this.defaultFrequency = 6600;
+        this.lowFrequency = 150;
     }
 
     init() {
@@ -49,7 +50,7 @@ class audioManager {
                     clip.buffer = buffer;
                     clip.loaded = true;
                     callback(clip);
-                    console.log(`loaded clip: ${clip.path}`);
+                    console.log(`Loaded clip: ${clip.path}`);
                 }
             );
         };

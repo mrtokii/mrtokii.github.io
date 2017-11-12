@@ -25,10 +25,12 @@ class Player extends Entity {
 
     onTouchEntity(entity) {
         if(entity.name.includes('ebody')) {
-            if(entity.ammo !== 0) {
-                this.ammo += entity.ammo;
-                entity.ammo = 0;
-                getAudioManager().play('res/sounds/pickup.mp3');
+            if(!getGameManager().cheats.wanrltw) {
+                if(entity.ammo !== 0) {
+                    this.ammo += entity.ammo;
+                    entity.ammo = 0;
+                    getAudioManager().play('res/sounds/pickup.mp3');
+                }
             }
         } else if(entity.name.includes('trigger_levelend')) {
             console.log('Completed the level!');
@@ -59,7 +61,9 @@ class Player extends Entity {
 
             getGameManager().entities.push(bullet);
 
-            this.ammo--;
+            if(!getGameManager().cheats.wanrltw) {
+                this.ammo--;
+            }
 
             getAudioManager().play('res/sounds/shot.mp3');
             getScoreManager().shotFired();

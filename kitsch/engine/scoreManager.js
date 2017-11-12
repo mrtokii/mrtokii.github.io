@@ -16,10 +16,12 @@ class scoreManager {
     enemyKilled(hardness) {
         this.score[this.currentLevel] += Math.floor(200 * hardness);
         this.killed[this.currentLevel]++;
+        //console.log(`Enemy Killed (${this.currentKills()})`);
     }
 
     shotFired() {
         this.fired[this.currentLevel]++;
+        //console.log(`Shot fired (${this.currentShots()})`);
     }
 
     currentScore() {

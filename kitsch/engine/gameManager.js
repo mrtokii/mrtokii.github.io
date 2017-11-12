@@ -9,6 +9,10 @@ class gameManager {
         this.worldUpdateTimer = null;
 
         this.pause = false;
+
+        this.cheats = {};
+        this.cheats['baguvix'] = false;
+        this.cheats['wanrltw'] = false;
     }
 
     initPlayer(obj) {
@@ -75,7 +79,7 @@ class gameManager {
             this.pause = false;
         } else {
             console.log(`PAUSE`);
-            getAudioManager().frequencyRamp(140, 1);
+            getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
             //getGameManager().clearScreen();
             getHudManager().drawTitleText('Pause');
             getHudManager().drawSubtitleText('Press  \`P\`  to  continue');
@@ -146,7 +150,7 @@ class gameManager {
 
         } else {
             getGameManager().stopScene();
-            getAudioManager().frequencyRamp(140, 1);
+            getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
             getHudManager().drawHero('endlevel');
             getHudManager().drawEndLevel();
             setTimeout( getGameManager().levelCompleted, 20 );
@@ -212,7 +216,9 @@ class gameManager {
         getAudioManager().loadArray([
             'res/sounds/timecop-loop.mp3',
             'res/sounds/pacemaker-loop.mp3',
-            'res/sounds/riot-loop.mp3',
+            'res/sounds/scorpions-loop.mp3',
+            /*'res/sounds/riot-loop.mp3',*/
+
             'res/sounds/death.mp3',
             'res/sounds/death2.mp3',
             'res/sounds/death3.mp3',

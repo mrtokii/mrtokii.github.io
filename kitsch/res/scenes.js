@@ -26,7 +26,7 @@ var gameScenes = [
         title: 'PART  III:  AMBUSH',
         subtitle: 'Everything  goes  wrong...',
         map: 'ambush.json',
-        music: 'res/sounds/riot-loop.mp3',
+        music: 'res/sounds/scorpions-loop.mp3',
         hero: 'hero-3',
         hint: 'ESCAPE THE BUILDING',
         walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
