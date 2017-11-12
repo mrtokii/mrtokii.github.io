@@ -13,6 +13,13 @@ class gameManager {
         this.cheats = {};
         this.cheats['baguvix'] = false;
         this.cheats['wanrltw'] = false;
+        this.cheats['stalker'] = false;
+
+        this.cheats.stalker_mode = function() {
+              getGameManager().cheats['stalker'] = true;
+              getAudioManager().stopAll();
+              getAudioManager().play('res/sounds/stalker.mp3');
+        };
     }
 
     initPlayer(obj) {
@@ -217,6 +224,7 @@ class gameManager {
             'res/sounds/timecop-loop.mp3',
             'res/sounds/pacemaker-loop.mp3',
             'res/sounds/scorpions-loop.mp3',
+            'res/sounds/stalker.mp3',
             /*'res/sounds/riot-loop.mp3',*/
 
             'res/sounds/death.mp3',
@@ -224,6 +232,16 @@ class gameManager {
             'res/sounds/death3.mp3',
             'res/sounds/death4.mp3',
             'res/sounds/death5.mp3',
+
+            'res/sounds/death-01.mp3',
+            'res/sounds/death-02.mp3',
+            'res/sounds/death-03.mp3',
+            'res/sounds/death-04.mp3',
+            'res/sounds/death-05.mp3',
+            'res/sounds/death-06.mp3',
+            'res/sounds/death-07.mp3',
+            'res/sounds/death-08.mp3',
+
             'res/sounds/pickup.mp3',
             'res/sounds/miss.mp3',
             'res/sounds/miss2.mp3',

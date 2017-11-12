@@ -116,15 +116,36 @@ class Enemy extends Entity {
     }
 
     kill() {
-        let deathSounds = [
-            'res/sounds/death.mp3',
-            'res/sounds/death2.mp3',
-            'res/sounds/death3.mp3',
-            'res/sounds/death4.mp3',
-            'res/sounds/death5.mp3',
-            'res/sounds/death.mp3'
-        ];
-        getAudioManager().play(deathSounds[Math.floor(Math.random() * 5)]);
+        let deathSounds;
+
+        if(getGameManager().cheats['stalker']) {
+            deathSounds = [
+                'res/sounds/death-01.mp3',
+                'res/sounds/death-02.mp3',
+                'res/sounds/death-03.mp3',
+                'res/sounds/death-04.mp3',
+                'res/sounds/death-05.mp3',
+                'res/sounds/death-06.mp3',
+                'res/sounds/death-07.mp3',
+                'res/sounds/death-08.mp3',
+                'res/sounds/death-07.mp3'
+            ];
+
+            getAudioManager().play(deathSounds[Math.floor(Math.random() * 8)]);
+        } else {
+            deathSounds = [
+                'res/sounds/death.mp3',
+                'res/sounds/death2.mp3',
+                'res/sounds/death3.mp3',
+                'res/sounds/death4.mp3',
+                'res/sounds/death5.mp3',
+                'res/sounds/death.mp3'
+            ];
+
+            getAudioManager().play(deathSounds[Math.floor(Math.random() * 5)]);
+        }
+
+
 
         let body = new EnemyBody();
         body.name = 'ebody' + (++getGameManager().fireNum);
