@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="left-up" width="40" height="20" tilewidth="32" tileheight="32" nextobjectid="34">
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="../images/tileset.png" width="256" height="256"/>
+ </tileset>
+ <layer name="background" width="40" height="20">
+  <data encoding="csv">
+2,3,3,3,3,3,3,3,3,4,2,3,3,3,3,3,3,3,3,4,2,3,3,3,3,4,2,3,3,3,3,3,3,3,3,3,3,3,3,4,
+10,11,11,11,11,11,11,11,11,12,10,11,11,11,11,11,11,11,11,12,10,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,12,
+10,11,11,11,11,11,11,11,11,12,10,11,43,47,43,47,43,47,11,12,10,11,11,11,11,25,26,11,11,11,11,11,11,11,11,11,11,11,11,12,
+10,11,11,11,11,11,11,11,11,12,10,11,47,43,47,43,47,43,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,
+10,11,11,11,11,11,11,11,11,12,10,11,11,11,11,11,11,11,11,12,10,11,11,11,11,27,28,11,11,11,11,11,11,11,11,11,11,11,11,12,
+10,11,11,11,11,27,19,19,19,20,18,19,28,11,27,19,19,19,19,20,10,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,12,
+10,11,11,11,11,12,2,3,3,3,3,3,26,11,25,3,3,3,3,4,10,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,12,
+10,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,12,10,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,12,
+18,28,11,27,19,20,10,11,11,11,11,11,11,11,11,11,11,11,11,12,10,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,12,
+2,26,11,25,3,4,10,11,11,11,11,11,11,11,11,11,11,11,11,25,26,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,12,
+10,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,11,11,11,12,
+10,11,47,15,11,12,10,11,11,11,11,11,11,27,19,19,19,19,19,19,19,19,19,19,19,20,18,19,28,11,27,19,19,19,19,19,28,11,27,20,
+10,11,15,47,11,12,10,11,11,11,11,11,11,12,2,3,3,3,3,3,3,3,3,3,4,2,3,3,26,11,25,3,3,3,4,2,26,11,25,4,
+10,11,47,15,11,25,26,11,11,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,12,10,11,11,11,11,11,11,11,11,12,10,11,11,11,12,
+10,11,15,47,11,11,11,11,11,11,11,11,11,12,10,11,47,43,47,43,47,43,47,11,12,10,11,47,15,47,15,47,15,11,12,10,11,11,11,12,
+10,11,47,15,11,27,28,11,11,11,11,11,11,12,10,11,43,47,43,47,43,47,43,11,25,26,11,15,47,15,47,15,47,11,12,10,11,11,11,12,
+10,11,15,47,11,12,10,11,11,11,11,11,11,12,10,11,47,43,47,43,47,43,47,11,11,11,11,47,15,47,15,47,15,11,12,10,11,11,11,12,
+10,11,47,15,11,12,10,11,11,11,11,11,11,12,10,11,43,47,43,47,43,47,43,11,27,28,11,15,47,15,47,15,47,11,12,10,11,11,11,12,
+10,11,11,11,11,12,10,11,11,11,11,11,11,12,10,11,11,11,11,11,11,11,11,11,12,10,11,11,11,11,11,11,11,11,12,10,11,11,11,12,
+18,19,19,19,19,20,18,19,19,19,19,19,19,20,18,19,19,19,19,19,19,19,19,19,20,18,19,19,19,19,19,19,19,19,20,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="1" name="player" type="Player" gid="9" x="1187" y="543" width="32" height="32">
+   <properties>
+    <property name="ammo" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="2" name="enemy1" type="Enemy" gid="17" x="988" y="342" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="3" name="enemy3" type="Enemy" gid="17" x="887" y="99" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="4" name="enemy2" type="Enemy" gid="17" x="877" y="238" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="5" name="enemy4" type="Enemy" gid="17" x="1086" y="80" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="6" name="enemy5" type="Enemy" gid="17" x="873" y="599" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="7" name="enemy7" type="Enemy" gid="17" x="1005" y="582" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="8" name="enemy6" type="Enemy" gid="17" x="947" y="509" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="9" name="enemy8" type="Enemy" gid="17" x="717" y="239" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="10" name="enemy9" type="Enemy" gid="17" x="526" y="497" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.3"/>
+   </properties>
+  </object>
+  <object id="11" name="enemy10" type="Enemy" gid="17" x="626" y="578" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.3"/>
+   </properties>
+  </object>
+  <object id="12" name="enemy11" type="Enemy" gid="17" x="243" y="598" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="13" name="enemy12" type="Enemy" gid="17" x="299" y="518" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="15" name="enemy14" type="Enemy" gid="17" x="340" y="595" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="16" name="enemy15" type="Enemy" gid="17" x="547" y="78" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="17" name="enemy16" type="Enemy" gid="17" x="47" y="597" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="18" name="enemy17" type="Enemy" gid="17" x="50" y="376" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="19" name="enemy19" type="Enemy" gid="17" x="239" y="93" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="20" name="enemy18" type="Enemy" gid="17" x="130" y="87" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="21" name="enemy20" type="Enemy" gid="17" x="41" y="69" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.8"/>
+   </properties>
+  </object>
+  <object id="22" name="enemy27" type="Enemy" gid="17" x="498" y="290" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.1"/>
+   </properties>
+  </object>
+  <object id="25" name="enemy26" type="Enemy" gid="17" x="474" y="318" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.1"/>
+   </properties>
+  </object>
+  <object id="26" name="enemy24" type="Enemy" gid="17" x="518" y="341" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.1"/>
+   </properties>
+  </object>
+  <object id="27" name="enemy21" type="Enemy" gid="17" x="307" y="285" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.1"/>
+   </properties>
+  </object>
+  <object id="28" name="enemy22" type="Enemy" gid="17" x="259" y="352" width="32" height="32">
+   <properties>
+    <property name="difficulty" type="float" value="0.1"/>
+   </properties>
+  </object>
+  <object id="29" name="trigger_killeveryone" type="PlayerTrigger" gid="45" x="1152" y="624" width="32" height="32"/>
+  <object id="32" name="trigger_killeveryone" type="PlayerTrigger" gid="45" x="1184" y="624" width="32" height="32"/>
+  <object id="33" name="trigger_killeveryone" type="PlayerTrigger" gid="45" x="1215" y="624" width="32" height="32"/>
+ </objectgroup>
+</map>

@@ -35,6 +35,16 @@ class Player extends Entity {
         } else if(entity.name.includes('trigger_levelend')) {
             console.log('Completed the level!');
             getGameManager().levelCompleted();
+        } else if(entity.name.includes('trigger_killeveryone')) {
+            console.log('Leaving attempt!');
+            for(let entity of getGameManager().entities) {
+                if(entity.name.includes('enemy')) {
+                    console.log('There are more enemies around!');
+                    return;
+                }
+            }
+            console.log('Completed the level!');
+            getGameManager().levelCompleted();
         }
     }
 

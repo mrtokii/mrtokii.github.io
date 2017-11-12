@@ -18,7 +18,7 @@ class gameManager {
         this.cheats.stalker_mode = function() {
               getGameManager().cheats['stalker'] = true;
               getAudioManager().stopAll();
-              getAudioManager().play('res/sounds/stalker.mp3');
+              getAudioManager().play('res/sounds/stalker.mp3', { looping: true });
         };
     }
 
@@ -224,6 +224,8 @@ class gameManager {
             'res/sounds/timecop-loop.mp3',
             'res/sounds/pacemaker-loop.mp3',
             'res/sounds/scorpions-loop.mp3',
+            'res/sounds/hardwired-loop.mp3',
+            'res/sounds/squad-loop.mp3',
             'res/sounds/stalker.mp3',
             /*'res/sounds/riot-loop.mp3',*/
 

@@ -30,5 +30,27 @@ var gameScenes = [
         hero: 'hero-3',
         hint: 'ESCAPE THE BUILDING',
         walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
+    },
+
+    {
+        sceneName: 'dejavu',
+        title: 'PART  IV:  DEJA  VU',
+        subtitle: 'I  remember  I\'ve  been  here  before...',
+        map: 'dejavu.json',
+        music: 'res/sounds/hardwired-loop.mp3',
+        hero: 'hero-4',
+        hint: 'ESCAPE THE CLUB',
+        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
+    },
+
+    {
+        sceneName: 'finale',
+        title: 'PART  V:  FINALE',
+        subtitle: 'Hello,  Big  Ronald!',
+        map: 'finale.json',
+        music: 'res/sounds/squad-loop.mp3',
+        hero: 'hero-5',
+        hint: 'KILL EVERYONE AND LEAVE',
+        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
     }
 ];
