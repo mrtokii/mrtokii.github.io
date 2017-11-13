@@ -1,53 +1,122 @@
 class scoreManager {
     constructor() {
-        this.score = [];
-        this.killed = [];
-        this.fired = [];
 
+        this.storage = [];
         this.clearAll();
+        this.load();
+
+        this.tempTimer = 0;
     }
 
     clearCurrentRecording() {
-        this.score[this.currentLevel] = 0;
-        this.killed[this.currentLevel] = 0;
-        this.fired[this.currentLevel] = 0;
+        this.storage[this.currentLevel].score = 0;
+        this.storage[this.currentLevel].killed = 0;
+        this.storage[this.currentLevel].fired = 0;
+        this.storage[this.currentLevel].time = 0;
     }
 
     enemyKilled(hardness) {
-        this.score[this.currentLevel] += Math.floor(200 * hardness);
-        this.killed[this.currentLevel]++;
+        this.storage[this.currentLevel].score += Math.floor(200 * hardness);
+        this.storage[this.currentLevel].killed++;
         //console.log(`Enemy Killed (${this.currentKills()})`);
     }
 
     shotFired() {
-        this.fired[this.currentLevel]++;
+        this.storage[this.currentLevel].fired++;
         //console.log(`Shot fired (${this.currentShots()})`);
     }
 
     currentScore() {
-        return this.score[this.currentLevel];
+        return this.storage[this.currentLevel].score;
     }
 
     currentShots() {
-        return this.fired[this.currentLevel];
+        return this.storage[this.currentLevel].fired;
     }
 
     currentKills() {
-        return this.killed[this.currentLevel];
+        return this.storage[this.currentLevel].killed;
+    }
+
+    startTimer() {
+        this.tempTimer = Date.now();
+    }
+
+    recordTime() {
+        this.storage[this.currentLevel].time = this.currentTime();
+    }
+
+    getCurrentTime() {
+        return this.storage[this.currentLevel].time;
+    }
+
+    currentTime() {
+        let timePassed = div( (Date.now() - this.tempTimer), 1000 );
+
+        let hours = div( timePassed, 3600 );
+        timePassed -= (3600 * hours);
+        let minutes = div( timePassed, 60 );
+        if(minutes < 10) minutes = '0' + minutes;
+        timePassed -= (60 * minutes);
+        if(timePassed < 10) timePassed = '0' + timePassed;
+
+        if(hours > 0) {
+            return `${hours}:${minutes}:${timePassed}`;
+        } else {
+            return `${minutes}:${timePassed}`;
+        }
+
     }
 
     clearAll() {
-        this.score = [];
-        this.killed = [];
-        this.fired = [];
+        this.storage = [];
 
         for(let i = 0; i < gameScenes.length; i++) {
-            this.score[i] = 0;
-            this.killed[i] = 0;
-            this.fired[i] = 0;
+            this.storage[i] = {};
+            this.storage[i].score = 0;
+            this.storage[i].killed = 0;
+            this.storage[i].fired = 0;
+            this.storage[i].time = 0;
         }
 
         this.currentLevel = 0;
+    }
+
+    save() {
+        if(storageAvailable('localStorage')) {
+            console.log(`Saving!`);
+            localStorage.setItem('score_data', JSON.stringify(this.storage));
+            localStorage.setItem('current_level', this.currentLevel);
+        } else {
+            console.log(`Local storage is unsupported!`);
+        }
+    }
+
+    load() {
+        if(storageAvailable('localStorage')) {
+            console.log(`Loading!`);
+            let scoreData = localStorage.getItem('score_data');
+            let currentLevel = localStorage.getItem('current_level');
+
+            if(scoreData !== null && currentLevel !== null) {
+                console.log(`Found saves!`);
+                this.storage = JSON.parse(scoreData);
+                this.currentLevel = currentLevel * 1;
+            } else {
+                console.log(`Saves not found!`);
+            }
+        } else {
+            console.log(`Local storage is unsupported!`);
+        }
+    }
+
+    clearSaves() {
+        if(storageAvailable('localStorage')) {
+            localStorage.removeItem('score_data');
+            localStorage.removeItem('current_level');
+        } else {
+            console.log(`Local storage is unsupported!`);
+        }
     }
 
 

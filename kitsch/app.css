@@ -1,0 +1,177 @@
+@font-face {
+    font-family: 'arcade-classic';
+    src: url('res/ARCADECLASSIC.TTF');
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    /*background: #222;*/
+
+    background-color: black;
+    background-image: url(res/images/kitsch-background.jpg);
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+}
+
+#canvas {
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateZ(0) translateX(-50%) translateY(-50%) scaleX(1.25) scaleY(1.25);
+
+    filter: contrast(105%) brightness(120%) blur(0px) saturate(130%);
+
+    border-radius: 15px;
+
+    -webkit-box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
+    -moz-box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
+    box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
+
+}
+
+.overlay-full {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+#wrapper {
+    background-image: url(res/images/kitsch-background.jpg);
+}
+
+#overlay {
+    background-image: url(res/images/kitsch-logo-help.jpg);
+    background-size: contain;
+}
+
+#scoreboard {
+    z-index: 800;
+    display: none;
+    padding: 100px;
+}
+
+#musicInfo {
+    z-index: 800;
+    display: none;
+}
+
+#musicInfo #musicInfo-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1200px;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#musicInfo #musicInfo-wrap #musicInfo-albums {
+
+}
+
+#musicInfo #musicInfo-wrap #musicInfo-text {
+    font: 26px 'arcade-classic', 'Impact';
+    color: #e437d2;
+    text-align: center;
+}
+
+#musicInfo #musicInfo-wrap #musicInfo-albums .musicInfo-album {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    margin: 15px;
+    padding: 0px;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    -webkit-box-shadow: 0px 0px 25px -5px rgba(228,55,210,1);
+    -moz-box-shadow: 0px 0px 25px -5px rgba(228,55,210,1);
+    box-shadow: 0px 0px 25px -5px rgba(228,55,210,1);
+}
+
+#scoreboard .overlay-text {
+    font: 20px 'arcade-classic', 'Impact';
+    color: white;
+    text-align: center;
+}
+
+#scoreboard .overlay-text b {
+    color: #e437d2;
+}
+
+#scoreboard-close, #scoreboard-clear {
+    position: absolute;
+    bottom: 20px;
+    margin: 10px;
+    left: 50%;
+}
+
+#scoreboard-close {
+    transform: translateX(5px);
+}
+
+#scoreboard-clear {
+    transform: translateX(-101%);
+}
+
+.big-button {
+    display: block;
+    padding: 10px 50px;
+    font: 28px 'arcade-classic', 'Impact';
+    cursor: pointer;
+    border-radius: 8px;
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    background: #ab2c9e;
+}
+
+.big-button:hover {
+    background: #e437d2;
+}
+
+#ok-button, #music-info-close {
+    position: absolute;
+    bottom: 20px;
+    margin: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#info {
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    margin: 0px;
+    padding: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font: 10px 'Arial', 'Impact';
+    color: #e437d2;
+
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#info a, #info a:visited {
+    text-decoration: underline;
+    color: #e437d2;
+}

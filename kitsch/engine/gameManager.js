@@ -172,6 +172,7 @@ class gameManager {
         getMapManager().parseMap(JSON.stringify(getMapManager().mapData));
         getMapManager().parseEntities();
 
+        getScoreManager().startTimer();
         getGameManager().play();
     }
 
@@ -188,7 +189,7 @@ class gameManager {
     }
 
     loadSceneFinish(sc) {
-        console.log(`Loading scene:`);
+        //console.log(`Loading scene:`);
         let jobs = 2;
 
         if( getMapManager().jsonLoaded ) {

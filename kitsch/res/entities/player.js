@@ -16,7 +16,7 @@ class Player extends Entity {
         let mouseDelta = getEventsManager().getMouseDelta();
         let angle = Math.atan2(mouseDelta.y, mouseDelta.x);
 
-        sm.drawSprite(context, 'player-shooting', this.posX, this.posY, angle);
+        getSpriteManager().drawSprite(context, 'player-shooting', this.posX, this.posY, angle);
     }
 
     update() {
@@ -34,6 +34,7 @@ class Player extends Entity {
             }
         } else if(entity.name.includes('trigger_levelend')) {
             console.log('Completed the level!');
+            getScoreManager().recordTime();
             getGameManager().levelCompleted();
         } else if(entity.name.includes('trigger_killeveryone')) {
             console.log('Leaving attempt!');
@@ -44,6 +45,7 @@ class Player extends Entity {
                 }
             }
             console.log('Completed the level!');
+            getScoreManager().recordTime();
             getGameManager().levelCompleted();
         }
     }

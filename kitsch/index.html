@@ -4,98 +4,7 @@
     <meta charset="UTF-8">
     <title>KITSCH</title>
 
-    <style>
-        @font-face {
-            font-family: 'arcade-classic';
-            src: url('res/ARCADECLASSIC.TTF');
-        }
-
-        body {
-            padding: 0px;
-            margin: 0px;
-            /*background: #222;*/
-
-            background-color: black;
-            background-image: url(res/images/kitsch-background.jpg);
-            background-position-x: center;
-            background-position-y: center;
-            background-repeat: no-repeat;
-        }
-
-        #canvas {
-            display: block;
-            padding: 0px;
-            margin: 0px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translateZ(0) translateX(-50%) translateY(-50%) scaleX(1.25) scaleY(1.25);
-
-            filter: contrast(105%) brightness(120%) blur(0px) saturate(130%);
-
-            border-radius: 15px;
-
-            -webkit-box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
-            -moz-box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
-            box-shadow: 0px 0px 13px -4px rgba(16,71,153,1), 0px 0px 10px 0px rgba(162,48,219,.2);
-
-        }
-
-        #wrapper, #overlay {
-            position: fixed;
-            top: 0px;
-            bottom: 0px;
-            left: 0px;
-            right: 0px;
-
-            background-position-x: center;
-            background-position-y: center;
-            background-repeat: no-repeat;
-            background-color: black;
-        }
-
-        #wrapper {
-            background-image: url(res/images/kitsch-background.jpg);
-        }
-
-        #overlay {
-            background-image: url(res/images/kitsch-logo-help.jpg);
-            background-size: contain;
-        }
-
-        #overlay #ok-button {
-            display: block;
-            position: absolute;
-            bottom: 20px;
-            margin: 10px;
-            padding: 10px 50px;
-            left: 50%;
-            transform: translateX(-50%);
-
-            font: 28px 'arcade-classic', 'Impact';
-            cursor: pointer;
-            border-radius: 8px;
-
-            background: #ab2c9e;
-        }
-
-        #overlay #ok-button:hover {
-            background: #e437d2;
-        }
-
-        #info {
-            display: block;
-            position: absolute;
-            bottom: 5px;
-            margin: 0px;
-            padding: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-
-            font: 8px 'Arial', 'Impact';
-            color: #e437d2;
-        }
-    </style>
+    <link rel="stylesheet" href="app.css">
 
     <meta property="og:image" content="res/images/kitsch-logo-mid.png">
     <meta property="og:description" content="This classic, hardcore arcade game sends you back to the 80s and gives you a nice warm feeling of hatred.">
@@ -103,20 +12,80 @@
 
 </head>
 <body>
-<div id="wrapper">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter46618731 = new Ya.Metrika({
+                    id:46618731,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/46618731" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<div id="wrapper" class="overlay-full">
     <canvas id="canvas" width="800px" height="600px">
         Your browser does not support CANVAS
     </canvas>
 </div>
 
-<div id="overlay">
-    <span id="ok-button" onclick="launch();">
+<div id="scoreboard" class="overlay-full">
+    <span class="overlay-text" id="scoreboard-text">
+        Score
+    </span>
+    <span class="big-button" id="scoreboard-clear" onclick="if( confirm(`Do you really want to reset your progress?`) ) {getScoreManager().clearSaves(); location.reload(); }">
+        CLEAR RECORDS
+    </span>
+    <span class="big-button" id="scoreboard-close" onclick="scoreboard(false);">
+        CLOSE
+    </span>
+</div>
+
+<div id="musicInfo" class="overlay-full">
+    <div id="musicInfo-wrap">
+        <div id="musicInfo-albums">
+            <div class="musicInfo-album" style="background-image: url(res/images/journeys.jpg)" onclick="window.open('https://itunes.apple.com/ru/album/l-a-nights/1066381142?i=1066382359','_self');"></div><div class="musicInfo-album" style="background-image: url(res/images/visitors.jpg)" onclick="window.open('https://itunes.apple.com/ru/album/pacemaker/871692315?i=871692336','_self');"></div><div class="musicInfo-album" style="background-image: url(res/images/welcome-reality.jpg)" onclick="window.open('https://itunes.apple.com/ru/album/scorpions/447406561?i=447406590','_self');"></div><div class="musicInfo-album" style="background-image: url(res/images/dangerous-days.jpg)" onclick="window.open('https://itunes.apple.com/ru/album/hard-wired-feat-isabella-goloversic/865453558?i=865453685','_self');"></div><div class="musicInfo-album" style="background-image: url(res/images/the-uncanny-valley.jpg)" onclick="window.open('https://itunes.apple.com/ru/album/death-squad/1093276294?i=1093276544','_self');"></div>
+
+        </div>
+        <div id="musicInfo-text">
+            Click&nbsp;&nbsp;on&nbsp;&nbsp;an&nbsp;&nbsp;album&nbsp;&nbsp;cover&nbsp;&nbsp;to&nbsp;&nbsp;go&nbsp;&nbsp;to&nbsp;&nbsp;iTunes
+            <br />
+            All songs are stolen :(
+        </div>
+    </div>
+
+    <span class="big-button" id="music-info-close" onclick="musicInfo(false);">
+        CLOSE
+    </span>
+</div>
+
+<div id="overlay" class="overlay-full">
+    <span id="ok-button" class="big-button" onclick="launch();">
         LAUNCH
     </span>
 </div>
 
 <span id="info">
-    V0.17.11.13 - MADE BY MRTOKII - ALL SONGS ARE STOLEN - ENJOY IT
+    V0.17.11.13 - MADE BY MRTOKII - <a href="#" onclick="scoreboard(true);">SCOREBOARD</a> - <a href="#" onclick="musicInfo(true);">MUSIC</a> - ENJOY IT
 </span>
 <script>
     let canvas = document.getElementById('canvas');
@@ -157,97 +126,7 @@
 <script src="res/entities/enemy.js"></script>
 <script src="res/entities/enemyBody.js"></script>
 
-<script>
+<script src="app.js"></script>
 
-    // Initialization
-
-    var levelBriefDuration = 8000;
-    var gameSpeed = 20;
-
-    var mm  = new mapManager();
-    var sm  = new spriteManager();
-    var em  = new eventsManager();
-    var pm  = new physicManager();
-    var gm  = new gameManager();
-    var hm  = new hudManager();
-    var am  = new audioManager();
-    var scm = new scoreManager();
-
-    function getCurrentContext() { return context; }
-    function getCurrentCanvas() { return canvas; }
-    function getEventsManager() { return em; }
-    function getSpriteManager() { return sm; }
-    function getGameManager() { return gm; }
-    function getPhysicManager() { return pm; }
-    function getMapManager() { return mm; }
-    function getHudManager() { return hm; }
-    function getAudioManager() { return am; }
-    function getScoreManager() { return scm; }
-
-    function completedLevel(l) {
-        startLevel(l + 1);
-    }
-
-    function startLevel(l) {
-        if(l < gameScenes.length) {
-            getAudioManager().stopAll();
-            getAudioManager().play(gameScenes[l].music, { looping: true });
-            getAudioManager().filter.frequency.value = getAudioManager().lowFrequency;
-
-            getScoreManager().currentLevel = l;
-
-            getGameManager().clearScreen();
-            getHudManager().drawHero(gameScenes[l].hero);
-            getHudManager().drawTitleText(gameScenes[l].title);
-            getHudManager().drawSubtitleText(gameScenes[l].subtitle);
-            getHudManager().drawLevelHint(gameScenes[l].hint)
-
-            setTimeout( () => {
-                getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
-                getGameManager().loadScene(gameScenes[l]);
-            }, levelBriefDuration);
-
-        } else {
-
-            let totalScore = 0;
-            for(let s of getScoreManager().score) {
-                totalScore += s;
-            }
-
-            getGameManager().clearScreen();
-            getHudManager().drawHero('endlevel');
-            getHudManager().drawTitleText('CONGRATULATIONS,  YOU  FINISHED  THE  GAME!');
-            getHudManager().drawSubtitleText(`Your total score: ${totalScore}`);
-
-        }
-    }
-
-    // On game resources load
-    function resourcesLoaded() {
-
-        // Loading start level
-        setTimeout( () => { startLevel(getScoreManager().currentLevel) }, 100 );
-
-        console.log('loaded all');
-        //getHudManager().drawHero('endlevel');
-    }
-
-    function launch() {
-        let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-        if(!isChrome) {
-            alert(`Please use Google Chrome.`);
-        } else {
-            getGameManager().loadResources();
-            document.getElementById('overlay').style.display = 'none';
-        }
-    }
-
-    // Starting
-    //launch();
-    //document.getElementById('overlay').style.display = 'none';
-
-
-
-</script>
 </body>
 </html>

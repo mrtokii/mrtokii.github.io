@@ -67,7 +67,7 @@ class hudManager {
 
     drawEndLevel() {
         this.drawTitleText(`Great  job!`);
-        this.drawSubtitleText(`Enemies  killed:  ${getScoreManager().currentKills()}\nShots  fired:  ${getScoreManager().currentShots()}\n---------------------------\nTotal  score:  ${getScoreManager().currentScore()}`);
+        this.drawSubtitleText(`Enemies  killed:  ${getScoreManager().currentKills()}\nShots  fired:  ${getScoreManager().currentShots()}\n Time:  ${getScoreManager().getCurrentTime()}\n---------------------------\nTotal  score:  ${getScoreManager().currentScore()}`);
         this.drawPressFireText();
     }
 
@@ -75,6 +75,7 @@ class hudManager {
         getGameManager().clearScreen();
         this.drawTitleText(`Loading`);
         this.drawSubtitleText(`Please  wait`);
+        this.drawLevelHint(`Your  progress  will  be  saved  automatically`);
     }
 
     drawLevelHint(hint) {

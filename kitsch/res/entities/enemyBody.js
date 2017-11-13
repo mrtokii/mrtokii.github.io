@@ -14,9 +14,13 @@ class EnemyBody extends Entity {
 
     draw() {
         if(this.difficulty >= 0.5) {
-            sm.drawSprite(context, 'enemy-body2', this.posX, this.posY, this.angle);
+            getSpriteManager().drawSprite(context, 'enemy-body2', this.posX, this.posY, this.angle);
         } else {
-            sm.drawSprite(context, 'enemy-body', this.posX, this.posY, this.angle);
+            getSpriteManager().drawSprite(context, 'enemy-body', this.posX, this.posY, this.angle);
+        }
+
+        if(this.ammo > 0) {
+            getSpriteManager().drawSprite(context, 'bullet-hud', this.posX + this.sizeX/2, this.posY + this.sizeY/2, this.angle + Math.PI / 4);
         }
     }
 
