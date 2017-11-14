@@ -31,6 +31,9 @@ class physicManager {
             obj.onTouchEntity(e);
         }
 
+        if(e !== null && obj.name.includes('enemy') && (e.name.includes('enemy') || e.name.includes('player')))
+            return 'break';
+
         if(!this.walkable(ts) && obj.onTouchMap)
             obj.onTouchMap(ts);
 
@@ -45,7 +48,13 @@ class physicManager {
             return 'break';
         }
 
+
+
         return 'move';
+    }
+
+    distance(from, to) {
+        return Math.sqrt( Math.pow(from.x - to.x, 2) + Math.pow(from.x - to.y, 2) );
     }
 
     walkable(idx) {

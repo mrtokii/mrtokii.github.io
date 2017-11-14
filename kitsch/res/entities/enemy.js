@@ -3,6 +3,7 @@ class Enemy extends Entity {
         super();
 
         this.ammo = 0;
+        this.alive = true;
 
         this.moveX = 0;
         this.moveY = 0;
@@ -116,6 +117,8 @@ class Enemy extends Entity {
     }
 
     kill() {
+        this.alive = false;
+
         let deathSounds;
 
         if(getGameManager().cheats['stalker']) {
@@ -144,8 +147,6 @@ class Enemy extends Entity {
 
             getAudioManager().play(deathSounds[Math.floor(Math.random() * 5)]);
         }
-
-
 
         let body = new EnemyBody();
         body.name = 'ebody' + (++getGameManager().fireNum);

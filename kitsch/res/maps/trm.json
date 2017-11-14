@@ -22,7 +22,7 @@
                  "name":"player",
                  "properties":
                     {
-                     "ammo":5
+                     "ammo":6
                     },
                  "propertytypes":
                     {
@@ -82,7 +82,7 @@
                  "name":"enemy5",
                  "properties":
                     {
-                     "difficulty":0.6
+                     "difficulty":0.5
                     },
                  "propertytypes":
                     {
@@ -122,7 +122,7 @@
                  "name":"enemy7",
                  "properties":
                     {
-                     "difficulty":0.7
+                     "difficulty":0.6
                     },
                  "propertytypes":
                     {
@@ -142,7 +142,7 @@
                  "name":"enemy8",
                  "properties":
                     {
-                     "difficulty":0.7
+                     "difficulty":0.6
                     },
                  "propertytypes":
                     {
@@ -242,7 +242,7 @@
                  "name":"enemy15",
                  "properties":
                     {
-                     "difficulty":0.2
+                     "difficulty":0.3
                     },
                  "propertytypes":
                     {
@@ -252,8 +252,8 @@
                  "type":"Enemy",
                  "visible":true,
                  "width":32,
-                 "x":516,
-                 "y":623
+                 "x":532,
+                 "y":625
                 }, 
                 {
                  "gid":17,
@@ -282,7 +282,7 @@
                  "name":"enemy19",
                  "properties":
                     {
-                     "difficulty":0.2
+                     "difficulty":0.1
                     },
                  "propertytypes":
                     {
@@ -302,7 +302,7 @@
                  "name":"enemy18",
                  "properties":
                     {
-                     "difficulty":0.2
+                     "difficulty":0.1
                     },
                  "propertytypes":
                     {
@@ -342,7 +342,7 @@
                  "name":"enemy20",
                  "properties":
                     {
-                     "difficulty":0.2
+                     "difficulty":0.3
                     },
                  "propertytypes":
                     {

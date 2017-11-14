@@ -50,7 +50,7 @@
  <objectgroup name="objects">
   <object id="1" name="player" type="Player" gid="9" x="74" y="1208" width="32" height="32">
    <properties>
-    <property name="ammo" type="int" value="5"/>
+    <property name="ammo" type="int" value="6"/>
    </properties>
   </object>
   <object id="4" name="enemy2" type="Enemy" gid="17" x="276" y="959" width="32" height="32">
@@ -65,7 +65,7 @@
   </object>
   <object id="7" name="enemy5" type="Enemy" gid="17" x="148" y="760" width="32" height="32">
    <properties>
-    <property name="difficulty" type="float" value="0.6"/>
+    <property name="difficulty" type="float" value="0.5"/>
    </properties>
   </object>
   <object id="8" name="enemy6" type="Enemy" gid="17" x="186" y="636" width="32" height="32">
@@ -75,12 +75,12 @@
   </object>
   <object id="9" name="enemy7" type="Enemy" gid="17" x="83" y="371" width="32" height="32">
    <properties>
-    <property name="difficulty" type="float" value="0.7"/>
+    <property name="difficulty" type="float" value="0.6"/>
    </properties>
   </object>
   <object id="10" name="enemy8" type="Enemy" gid="17" x="282" y="366" width="32" height="32">
    <properties>
-    <property name="difficulty" type="float" value="0.7"/>
+    <property name="difficulty" type="float" value="0.6"/>
    </properties>
   </object>
   <object id="11" name="enemy9" type="Enemy" gid="17" x="176" y="109" width="32" height="32">
@@ -103,9 +103,9 @@
     <property name="difficulty" type="float" value="0.2"/>
    </properties>
   </object>
-  <object id="17" name="enemy15" type="Enemy" gid="17" x="516" y="623" width="32" height="32">
+  <object id="17" name="enemy15" type="Enemy" gid="17" x="532" y="625" width="32" height="32">
    <properties>
-    <property name="difficulty" type="float" value="0.2"/>
+    <property name="difficulty" type="float" value="0.3"/>
    </properties>
   </object>
   <object id="18" name="enemy16" type="Enemy" gid="17" x="736" y="635" width="32" height="32">
@@ -115,12 +115,12 @@
   </object>
   <object id="19" name="enemy19" type="Enemy" gid="17" x="747" y="852" width="32" height="32">
    <properties>
-    <property name="difficulty" type="float" value="0.2"/>
+    <property name="difficulty" type="float" value="0.1"/>
    </properties>
   </object>
   <object id="20" name="enemy18" type="Enemy" gid="17" x="529" y="853" width="32" height="32">
    <properties>
-    <property name="difficulty" type="float" value="0.2"/>
+    <property name="difficulty" type="float" value="0.1"/>
    </properties>
   </object>
   <object id="21" name="enemy17" type="Enemy" gid="17" x="637" y="734" width="32" height="32">
@@ -130,7 +130,7 @@
   </object>
   <object id="23" name="enemy20" type="Enemy" gid="17" x="778" y="1075" width="32" height="32">
    <properties>
-    <property name="difficulty" type="float" value="0.2"/>
+    <property name="difficulty" type="float" value="0.3"/>
    </properties>
   </object>
   <object id="24" name="trigger_levelend" type="PlayerTrigger" gid="45" x="897" y="1184" width="32" height="32"/>

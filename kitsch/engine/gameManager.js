@@ -82,10 +82,12 @@ class gameManager {
     togglePause() {
         if(this.pause) {
             console.log(`UNPAUSE`);
+            getScoreManager().timerUnpause();
             getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
             this.pause = false;
         } else {
             console.log(`PAUSE`);
+            getScoreManager().timerPause();
             getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
             //getGameManager().clearScreen();
             getHudManager().drawTitleText('Pause');

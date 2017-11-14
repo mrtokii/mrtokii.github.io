@@ -6,6 +6,8 @@ class scoreManager {
         this.load();
 
         this.tempTimer = 0;
+
+        this.pauseTimer = 0;
     }
 
     clearCurrentRecording() {
@@ -13,6 +15,7 @@ class scoreManager {
         this.storage[this.currentLevel].killed = 0;
         this.storage[this.currentLevel].fired = 0;
         this.storage[this.currentLevel].time = 0;
+        this.storage[this.currentLevel].total = 0;
     }
 
     enemyKilled(hardness) {
@@ -42,6 +45,16 @@ class scoreManager {
         this.tempTimer = Date.now();
     }
 
+    timerPause() {
+        this.pauseTimer = Date.now();
+    }
+
+    timerUnpause() {
+        let pause = Date.now() - this.pauseTimer;
+        this.tempTimer += pause;
+        this.pauseTimer = 0;
+    }
+
     recordTime() {
         this.storage[this.currentLevel].time = this.currentTime();
     }
@@ -51,21 +64,27 @@ class scoreManager {
     }
 
     currentTime() {
-        let timePassed = div( (Date.now() - this.tempTimer), 1000 );
+        return Date.now() - this.tempTimer;
+    }
 
-        let hours = div( timePassed, 3600 );
-        timePassed -= (3600 * hours);
-        let minutes = div( timePassed, 60 );
-        if(minutes < 10) minutes = '0' + minutes;
-        timePassed -= (60 * minutes);
-        if(timePassed < 10) timePassed = '0' + timePassed;
+    calculateTotal() {
+        this.storage[this.currentLevel].total = this.storage[this.currentLevel].score + this.getCurrentAmmoBonus() + this.getCurrentTimeBonus();
+    }
 
-        if(hours > 0) {
-            return `${hours}:${minutes}:${timePassed}`;
-        } else {
-            return `${minutes}:${timePassed}`;
+    getCurrentTotalScore() {
+        return this.storage[this.currentLevel].total;
+    }
+
+    getCurrentAmmoBonus() {
+        if(this.currentKills() > this.currentShots()) {
+            return 0;
         }
 
+        return  Math.floor(500 / (this.currentShots() / (this.currentKills()*1.0)));
+    }
+
+    getCurrentTimeBonus() {
+        return  Math.floor(300 / ( div(this.getCurrentTime(), 1000) / 40 ));
     }
 
     clearAll() {
@@ -77,6 +96,7 @@ class scoreManager {
             this.storage[i].killed = 0;
             this.storage[i].fired = 0;
             this.storage[i].time = 0;
+            this.storage[i].total = 0;
         }
 
         this.currentLevel = 0;
@@ -107,6 +127,23 @@ class scoreManager {
             }
         } else {
             console.log(`Local storage is unsupported!`);
+        }
+    }
+
+    getTimeString(ms) {
+        let timePassed = div( ms, 1000 );
+
+        let hours = div( timePassed, 3600 );
+        timePassed -= (3600 * hours);
+        let minutes = div( timePassed, 60 );
+        if(minutes < 10) minutes = '0' + minutes;
+        timePassed -= (60 * minutes);
+        if(timePassed < 10) timePassed = '0' + timePassed;
+
+        if(hours > 0) {
+            return `${hours}:${minutes}:${timePassed}`;
+        } else {
+            return `${minutes}:${timePassed}`;
         }
     }
 

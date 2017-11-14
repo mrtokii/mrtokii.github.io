@@ -35,6 +35,7 @@ class Player extends Entity {
         } else if(entity.name.includes('trigger_levelend')) {
             console.log('Completed the level!');
             getScoreManager().recordTime();
+            getScoreManager().calculateTotal();
             getGameManager().levelCompleted();
         } else if(entity.name.includes('trigger_killeveryone')) {
             console.log('Leaving attempt!');
@@ -46,6 +47,7 @@ class Player extends Entity {
             }
             console.log('Completed the level!');
             getScoreManager().recordTime();
+            getScoreManager().calculateTotal();
             getGameManager().levelCompleted();
         }
     }

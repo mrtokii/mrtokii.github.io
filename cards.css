@@ -9,6 +9,12 @@
     background-image: url(res/img/project-xalyva.png);
 }
 
+#project-kitsch {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    background-image: url(res/img/project-kitsch.png);
+}
+
 #project-sweephard {
     background-color: #3A75C4;
     color: white;

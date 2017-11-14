@@ -113,8 +113,8 @@ function scoreboard(en) {
             scoreboardTextElement.innerHTML += (`<b>${gameScenes[i].title}</b><br />`);
             scoreboardTextElement.innerHTML += (`Enemies killed: ${getScoreManager().storage[i].killed}<br />`);
             scoreboardTextElement.innerHTML += (`Shots fired: ${getScoreManager().storage[i].fired}<br />`);
-            scoreboardTextElement.innerHTML += (`Time: ${getScoreManager().storage[i].time}<br />`);
-            scoreboardTextElement.innerHTML += (`Score: ${getScoreManager().storage[i].score}<br /><br />`);
+            scoreboardTextElement.innerHTML += (`Time: ${getScoreManager().getTimeString(getScoreManager().storage[i].time)}<br />`);
+            scoreboardTextElement.innerHTML += (`Score: ${getScoreManager().storage[i].total}<br /><br />`);
         }
 
     } else {

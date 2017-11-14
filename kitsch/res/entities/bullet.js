@@ -24,8 +24,10 @@ class Bullet extends Entity {
         if(entity.name.includes('enemy')) {
             let e = getGameManager().entity(entity.name);
             if(e !== null) {
-                getScoreManager().enemyKilled(entity.difficulty);
-                e.kill();
+                if(e.alive) {
+                    getScoreManager().enemyKilled(entity.difficulty);
+                    e.kill();
+                }
             }
             this.kill();
         }
