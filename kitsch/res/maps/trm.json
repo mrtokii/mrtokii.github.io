@@ -22,7 +22,7 @@
                  "name":"player",
                  "properties":
                     {
-                     "ammo":6
+                     "ammo":10
                     },
                  "propertytypes":
                     {
@@ -42,7 +42,7 @@
                  "name":"enemy2",
                  "properties":
                     {
-                     "difficulty":0.2
+                     "difficulty":0.1
                     },
                  "propertytypes":
                     {
@@ -82,7 +82,7 @@
                  "name":"enemy5",
                  "properties":
                     {
-                     "difficulty":0.5
+                     "difficulty":0.4
                     },
                  "propertytypes":
                     {
@@ -298,8 +298,8 @@
                 {
                  "gid":17,
                  "height":32,
-                 "id":20,
-                 "name":"enemy18",
+                 "id":21,
+                 "name":"enemy17",
                  "properties":
                     {
                      "difficulty":0.1
@@ -312,28 +312,8 @@
                  "type":"Enemy",
                  "visible":true,
                  "width":32,
-                 "x":529,
-                 "y":853
-                }, 
-                {
-                 "gid":17,
-                 "height":32,
-                 "id":21,
-                 "name":"enemy17",
-                 "properties":
-                    {
-                     "difficulty":0.2
-                    },
-                 "propertytypes":
-                    {
-                     "difficulty":"float"
-                    },
-                 "rotation":0,
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":32,
-                 "x":637,
-                 "y":734
+                 "x":633,
+                 "y":766
                 }, 
                 {
                  "gid":17,
@@ -342,7 +322,7 @@
                  "name":"enemy20",
                  "properties":
                     {
-                     "difficulty":0.3
+                     "difficulty":0.1
                     },
                  "propertytypes":
                     {
