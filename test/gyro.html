@@ -13,7 +13,7 @@
 		
 		</style>
 
-		<script type="text/javascript" src="jQuery.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		
 	</head>
@@ -53,7 +53,7 @@
 			context.closePath();			
 			context.stroke();
 
-			$('#g-alpha').html('Alpha: <b>' + Math.round(event.alpha) + '</b> | N (probably): <b>' + (360 - Math.round(event.alpha)) + '</b>');
+			$('#g-alpha').html('Alpha: <b>' + Math.round(event.alpha) + '</b> | N (maybe): <b>' + (360 - Math.round(event.alpha)) + '</b>');
 			$('#g-beta').html('Beta: <b>' + Math.round(event.beta) + '</b>');
 			$('#g-gamma').html('Gamma: <b>' + Math.round(event.gamma) + '</b>');
 		}
