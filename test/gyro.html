@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<link rel="apple-touch-icon" href="/sun.png">
+
+		<title>GYROSCOPE TEST</title>
+
+		<style>
+		
+		</style>
+
+		<script type="text/javascript" src="jQuery.js"></script>
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		
+	</head>
+	
+	<body>
+		<div id = "g-alpha">Alpha: 0</div>
+		<div id = "g-beta">Beta: 0</div>
+		<div id = "g-gamma">Gamma: 0</div>
+	
+		<canvas width="300" height="300" id = "g-canvas"></canvas>
+	</body>
+	
+	
+	<script>
+		var canvas = document.getElementById('g-canvas');
+		var context = canvas.getContext('2d');
+
+		var lineLength = 120;
+		context.strokeStyle = "#fff";
+		context.lineWidth = 3;
+
+		window.ondeviceorientation = function(event) {			
+			var compassN = Math.round(event.alpha - 90);
+			var compassNrad = compassN / 180 * Math.PI;
+
+			var newLineLength = lineLength - Math.round( ((Math.abs(event.beta) + Math.abs(event.gamma)) / 2) / 90 * lineLength ); 
+
+			var endPointX = 150 + Math.cos(compassNrad) * newLineLength;
+			var endPointY = 150 + Math.sin(compassNrad) * newLineLength;
+
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			context.fillRect(0, 0, 300, 300);
+
+			context.beginPath();
+			context.moveTo(150, 150);			
+			context.lineTo(endPointX, endPointY);
+			context.closePath();			
+			context.stroke();
+
+			$('#g-alpha').html('Alpha: <b>' + Math.round(event.alpha) + '</b> | N (probably): <b>' + (360 - Math.round(event.alpha)) + '</b>');
+			$('#g-beta').html('Beta: <b>' + Math.round(event.beta) + '</b>');
+			$('#g-gamma').html('Gamma: <b>' + Math.round(event.gamma) + '</b>');
+		}
+	</script>
+</html>

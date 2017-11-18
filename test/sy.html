@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+
+		<title>SOUND TEST</title>
+
+		<style>
+		
+		</style>
+
+		<script type="text/javascript" src="jQuery.js"></script>
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		
+	</head>
+	
+	<body>
+		<div id = "g-alpha">Alpha: 0</div>
+		<div id = "g-beta">Beta: 0</div>
+		<div id = "g-gamma">Gamma: 0</div>
+
+		<div id = "s-sine">SINE</div>
+		<div id = "s-square">SQUARE</div>
+		<div id = "s-sawtooth">SAWTOOTH</div>
+		<div id = "s-triangle">TRIANGLE</div>
+	</body>
+	
+	
+	<script>
+		var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		var value = 500;
+		var lastAlpha = 0;
+		// create Oscillator node
+		var oscillator = audioCtx.createOscillator();
+
+		oscillator.type = 'sine';
+		oscillator.frequency.value = 500; // value in hertz
+		oscillator.connect(audioCtx.destination);
+		oscillator.start();
+		window.ondeviceorientation = function(event) {
+			if(lastAlpha > Math.round(event.alpha)) {
+				value = value + 2;
+			}
+			if(lastAlpha < Math.round(event.alpha)) {
+				value = value - 2;			
+			}
+
+			oscillator.frequency.value = value;			
+			$('#g-alpha').text('Alpha: ' + Math.round(event.alpha));
+			$('#g-beta').text('Beta: ' + Math.round(event.beta));
+			$('#g-gamma').text('Value: ' + value);
+			lastAlpha = Math.round(event.alpha);
+		}
+
+		document.getElementById('s-sine').onclick=function(){ oscillator.type = 'sine'; };
+		document.getElementById('s-square').onclick=function(){ oscillator.type = 'square'; };
+		document.getElementById('s-sawtooth').onclick=function(){ oscillator.type = 'sawtooth'; };
+		document.getElementById('s-triangle').onclick=function(){ oscillator.type = 'triangle'; };
+
+		window.addEventListener('touchstart', function() {
+			// create empty buffer
+			var buffer = audioCtx.createBuffer(1, 1, 22050);
+			var source = audioCtx.createBufferSource();
+			source.buffer = buffer;
+
+			// connect to output (your speakers)
+			source.connect(audioCtx.destination);
+
+			// play the file
+			source.noteOn(0);
+
+		}, false);
+
+	</script>
+</html>
