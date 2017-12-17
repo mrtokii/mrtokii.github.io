@@ -1,12 +1,26 @@
 #project-sorting {
-    background-color: #F7943C;
-    background-image: url(res/img/project-sorting.png);
+    /*background-color: #F7943C;*/
+    background: url(res/img/project-sorting.png), #ffe259;
+    background: url(res/img/project-sorting.png), -webkit-linear-gradient(to right, #ffa751, #ffe259);
+    background: url(res/img/project-sorting.png), linear-gradient(to right, #ffa751, #ffe259);
+    color: black;
+
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: auto 150%;
+    
 }
 
 #project-xalyva {
-    background-color: #32127A;
+    /*background-color: #32127A;*/
+    background: url(res/img/project-xalyva.png), #c0392b;
+    background: url(res/img/project-xalyva.png), -webkit-linear-gradient(to right, #8e44ad, #c0392b);
+    background: url(res/img/project-xalyva.png), linear-gradient(to right, #8e44ad, #c0392b); 
     color: white;
-    background-image: url(res/img/project-xalyva.png);
+
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: auto 150%;
 }
 
 #project-kitsch {
@@ -16,7 +30,19 @@
 }
 
 #project-sweephard {
-    background-color: #3A75C4;
-    color: white;
-    background-image: url(res/img/project-sweephard.png);
+    /*background-color: #3A75C4;*/
+    background: url(res/img/project-sweephard.png), #1c92d2;
+    background: url(res/img/project-sweephard.png), -webkit-linear-gradient(to right, #f2fcfe, #1c92d2);
+    background: url(res/img/project-sweephard.png), linear-gradient(to right, #f2fcfe, #1c92d2);   
+    color: black;
+
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: auto 150%;
+}
+
+.card {
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: auto 150%;
 }
