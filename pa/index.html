@@ -1,0 +1,192 @@
+<html>
+    <head>
+        <title>Peterburg Analytica</title>
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/21.0.0/min/jcanvas.min.js"
+        crossorigin="anonymous"></script>
+
+        <style>
+            html, body {
+                padding: 0px;
+                margin: 0px;
+            }
+
+            #header {
+                width:100%; 
+                background-image:url(pa-small.png); 
+                background-color: #a60a44; 
+                height: 80px; 
+                background-repeat: no-repeat;
+            }
+
+            #page {
+                padding: 10px;
+            }
+
+            #controls {
+                padding: 15px;
+                background: #630628;
+            }
+        </style>
+    </head>
+
+<body>
+    <div id="header"></div>
+    <div id="controls">
+        <select id="day">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+        </select>
+        
+        <select id="month">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+        </select>
+        
+        <button onclick="show()">Show</button>   
+    </div>
+    <div id="page">     
+        <div id="content">
+            
+        </div>
+    </div>
+
+    
+    
+    <script>
+        var user_data = []
+        var colors = {
+            no_data: '#eee',
+            offline: '#ccc',
+            online: '#630628',
+            mobile: '#bb0045'
+        }
+    
+        function show() {
+            getData($('#day').val(), $('#month').val())
+        }
+    
+        function getData(day, month) {
+            console.log(`get data> day ${day}, month ${month}`)
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', `http://80.87.194.113:8080/?day=${day}&month=${month}`, false)
+            xhr.send()
+            if (xhr.status != 200) {
+                alert( xhr.status + ': ' + xhr.statusText )
+                return undefined
+            } else {
+                user_data = JSON.parse(xhr.responseText)
+                console.log(`recieved data`)
+    
+                if(user_data.error === undefined)
+                    drawProfiles()
+                else 
+                    alert('Error: ' + user_data.error)
+    
+                return xhr.responseText
+            }
+        }
+    
+        function drawProfiles() {
+            $('#content').empty()
+            for(let user of user_data) {
+                $('#content').append(getUserProfile(user))
+            }
+        }
+    
+        function getUserProfile(user) {
+            let profile_element = $(`<p></p>`)
+            let profile_header = $(`<div>${user.first_name} ${user.last_name} (${user.id})</div>`)
+    
+            var $myCanvas = $(`<canvas id="profile-${user.id}" width="1440" height="30"></canvas>`);
+    
+            let current_pos = 0
+            for(var region of user.samples) {
+                let color = 'black'
+                switch(region.val) {
+                    case -1: color = colors.no_data; break
+                    case 0: color = colors.offline; break
+                    case 1: color = colors.online; break
+                    case 2: color = colors.mobile; break
+                }
+    
+                let region_width = region.count * 2
+    
+                $myCanvas.drawRect({
+                    fillStyle: color,
+                    x: current_pos, y: 0,
+                    fromCenter: false,
+                    width: region_width,
+                    height: 30
+                });
+    
+                current_pos += region_width
+            }
+    
+            // rectangle shape 
+            $myCanvas.drawRect({
+                fillStyle: 'steelblue',
+                x: 150, y: 100,
+                fromCenter: false,
+                width: 200,
+                height: 100
+            });
+    
+            profile_element.append(profile_header)
+            profile_element.append($myCanvas)
+    
+            return profile_element
+        }
+    
+        let today = new Date()
+        $('#day').val(today.getDate())
+        $('#month').val(today.getMonth())
+        getData(today.getDate(), today.getMonth())
+        
+    </script>
+</body>
+
+</html>
