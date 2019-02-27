@@ -29,12 +29,6 @@
     background-image: url(res/img/project-kitsch.png);
 }
 
-#project-music {
-    background-color: #181818;
-    color: white;
-    background-image: url(res/img/project-music.jpg);
-}
-
 #project-sweephard {
     /*background-color: #3A75C4;*/
     background: url(res/img/project-sweephard.png), #1c92d2;
