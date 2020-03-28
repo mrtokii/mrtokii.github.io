@@ -69,6 +69,55 @@ body {
     text-decoration: none;
 }
 
+#header {
+    padding: 32px;
+    margin-bottom: 15px;
+    text-align: center;
+
+    font-size: 18px;
+}
+
+#header > * {
+    margin: 16px;
+}
+
+.about-portrait {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    background-color: #ccc;
+
+    -webkit-box-shadow: 0px 6px 25px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 6px 25px -11px rgba(0,0,0,0.75);
+    box-shadow: 0px 6px 25px -11px rgba(0,0,0,0.75);
+}
+
+.about-title {
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.about-subtitle {
+    font-size: 14px;
+    color: #bbb;
+    font-weight: 100;
+}
+
+.about-text {
+    
+}
+
+.about-text a, .about-text a:visited {
+    color: #1c92d2;
+    text-decoration: none;
+    padding: 4px;
+}
+
+.about-text a:hover {
+    background-color: #1c92d2;
+    color: white;
+    border-radius: 4px; 
+}
 
 @media (max-width: 680px) {
     #main-wrapper {
@@ -94,6 +143,10 @@ body {
     
     .card .card-title {
         font-size: 1.5em;
+    }
+
+    .about-text {
+        font-size: 0.8em;
     }
 
     #footer {
