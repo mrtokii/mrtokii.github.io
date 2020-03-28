@@ -28,6 +28,18 @@
     background-image: url(res/img/project-kitsch.png);
 }
 
+#project-umbrellify {
+    background-color: rgb(0, 0, 0);
+    color: black;
+    background: url(res/img/project-umbrellify.png), #ffccb5;
+    background: url(res/img/project-umbrellify.png), -webkit-linear-gradient(to right, #ffccb5, #f06203);
+    background: url(res/img/project-umbrellify.png), linear-gradient(to right, #ffccb5, #f06203);  
+
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: auto 150%;
+}
+
 #project-sweephard {
     /*background-color: #3A75C4;*/
     background: url(res/img/project-sweephard.png), #1c92d2;

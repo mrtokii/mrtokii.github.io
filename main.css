@@ -49,6 +49,11 @@ body {
     opacity: 0.8;
 }
 
+.small-text {
+    font-size: 0.4em;
+    opacity: 0.5;
+}
+
 .card .card-desc {
     display: block;
 
@@ -101,10 +106,6 @@ body {
     font-size: 14px;
     color: #bbb;
     font-weight: 100;
-}
-
-.about-text {
-    
 }
 
 .about-text a, .about-text a:visited {
