@@ -96,25 +96,21 @@ function currentDiv(n) {
 function showDivs(n) {
   var i;
   var x = document.getElementsByClassName("image");
-  var date = document.getElementById("date-container");
-  
+  var date = document.getElementById("date-container"); 
   if (n > x.length) {slideIndex = 1}
   if (n < 1) {slideIndex = x.length}
   for (i = 0; i < x.length; i++) {
     x[i].style.opacity = "0";  
   }
   x[slideIndex-1].style.opacity = "1";  
-  
   var currentDate = new Date(2020, 6, 6, 10, 0, 0, 0);
-  currentDate.setDate(currentDate.getDate() + slideIndex - 1);
-  
+  currentDate.setDate(currentDate.getDate() + slideIndex - 1); 
   var options = {
     month: 'long',
     day: 'numeric',
     weekday: 'long',
     timezone: 'UTC',
-  };
-  
+  }; 
   date.innerHTML = currentDate.toLocaleString("ru", options);
 }
 </script>
