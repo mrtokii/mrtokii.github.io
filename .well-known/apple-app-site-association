@@ -1,0 +1,16 @@
+{
+   "applinks":{
+      "details":[
+         {
+            "appIDs":[
+               "D4HA43V467.ru.touchin.ubrd"
+            ],
+            "components":[
+               {
+                  "/":"/*"
+               }
+            ]
+         }
+      ]
+   }
+}
